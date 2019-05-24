@@ -1,0 +1,94 @@
+#tooltip-flow {
+	position: absolute;
+	width: auto; /* width: 110px; */
+	height: auto;
+	padding: 7px;
+	border: 2px;
+	pointer-events: none;
+	background: rgba(255, 255, 255, 0.90);
+}
+
+#tooltip-flow p.title {
+	opacity: 1;
+	font-size: 13px;
+	font-weight: bold;
+	text-transform: capitalize;
+}
+
+#tooltip-flow p.info {
+	font-size: 12px;
+}
+
+#tooltip-flow p.message {
+	font-size: 10px;
+}
+
+#data-modal-title p.title {
+	font-size: 16px;
+}
+
+#data-modal-title p.info {
+	font-size: 14px;
+}
+
+#data-modal-msg {
+	width: auto;
+	max-height: 400px;
+	overflow: auto;
+}
+
+#data-modal-msg table td {
+	text-align: left;
+	font-size: 12px;
+	max-width: 200px;
+	min-width: 10px;
+	white-space: nowrap;
+	word-wrap: break-word;
+	text-overflow: ellipsis;
+	overflow: hidden;
+}
+
+/* ---------------------------------------- */
+#tooltip-tree {
+	position: absolute;
+	opacity: 0;
+	display: inline-block;
+	background-color: #c0c0c0;
+	width: auto;
+	height: auto;
+	border-radius: 5px;
+	border: 1px;
+	/* border-style: outset; */
+	/* transition: opacity 1s; */
+}
+
+#tooltip-tree button {
+	border: none;
+	color: white;
+	margin: 3px 3px;
+	padding: 2px 2px;
+	display: inline-block;
+	width: 22px;
+	height: 22px;
+	background-position: center;
+	background-repeat: no-repeat;
+}
+
+#tooltip-tree button.btnUpHierarchy {
+	background-color: none;
+	background-image: url(../img/icon_hierarchy_left.svg);
+}
+
+#tooltip-tree button.btnDownHierarchy {
+	background-color: none;
+	background-image: url(../img/icon_hierarchy_right.svg);
+}
+
+/* #tooltip-tree input.chkVisible {
+	background-position: center;
+	background-repeat: no-repeat; 
+	margin: 3px 3px;
+	display: inline	;
+	width: 22px;
+	height: 22px;
+} */

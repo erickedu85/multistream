@@ -1,0 +1,36 @@
+.node circle {
+	fill: #fff;
+	stroke: steelblue;
+	stroke-width: 5px;
+}
+
+.node {
+	cursor: default;
+}
+
+.node text {
+	font: 10px sans-serif;
+	text-transform: capitalize;
+	pointer-events: none;
+}
+
+.link {
+	fill: none;
+	stroke: #ccc;
+	stroke-width: 1.3px;
+	opacity: 1;
+}
+
+.lineTopHierarchy, .lineBottomHierarchy{
+	pointer-events: none;
+	stroke-width: 6px;
+	stroke-dasharray: 1.5;
+}
+
+.lineTopHierarchy{
+	stroke: blue;
+}
+
+.lineBottomHierarchy{
+	stroke: green;
+}

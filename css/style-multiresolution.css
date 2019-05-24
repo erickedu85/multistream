@@ -1,0 +1,389 @@
+/* visiblePainted | visibleFill | visibleStroke | visible | painted | fill | stroke | all | none | inherit */
+/* auto | optimizeSpeed | crispEdges | geometricPrecision*/
+
+.md-menu-white{background-image:url("../img/icon_hierarchy_menu.svg")!important;}
+.md-download-svg-white{background-image:url("../img/icon_download.svg")!important;}
+
+body {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div {
+    -webkit-user-select: none; /* Chrome, Opera, Safari */
+    -moz-user-select: none; /* Firefox 2+ */
+    -ms-user-select: none; /* IE 10+ */
+    /* user-select: none; Standard syntax */
+}
+
+#body-visualization {
+	/* to hidden the vertical-ruler when it goes out of screen */
+	/* overflow: hidden; */	
+}
+
+#alert-msg {
+	position: absolute;
+	visibility: visible;
+	left: 50%; 
+	bottom: 60px;
+	/*  -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%); */
+	padding: 10px 30px 10px 20px;
+	border-style: solid;
+	border-color: #ff9800;
+	background-color: #ff9800; /* #ff9800; warning #f44336; error */
+	color: white;
+	opacity: 1;
+	transition: 0.6s;
+}
+
+#close-alert {
+	margin-left: 15px;
+	color: white;
+	/* font-weight: bold; */
+	float: right;
+	font-size: 22px;
+	line-height: 25px;
+	cursor: pointer;
+	opacity: 1;
+	transition: 0.3s;
+}
+
+#close-alert:hover {
+	color: black;
+}
+
+#panelInfo{
+	cursor:pointer;
+}
+
+#not-used {
+	cursor: url('../img/move.png') 13 13, auto;
+	/* or changer to cursor: col-resize; */
+}
+
+.panel {
+	background-color: #efefef;
+	border-radius: 5px;
+}
+
+#file-name {
+	color: #8b8b8b;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+}
+
+h2.title {
+	color: #111;
+	font-family: 'Helvetica Neue', sans-serif;
+	font-size: 27px;
+	font-weight: bold;
+	letter-spacing: -1px;
+	line-height: 1;
+	text-align: center;
+}
+
+h3.title {
+	color: #8b8b8b;
+	font-family: 'Open Sans', sans-serif;
+	font-size: 20px;
+	font-weight: 100;
+	line-height: 25px;
+	margin: -5px 0 20px 0;
+	text-align: center;
+}
+
+input[type=number] {
+	-moz-appearance: none;
+	appearance: textfield;
+	position: relative;
+	width: 80%;
+	display: inline-block;
+}
+
+.btn.btn-default.dropdown-toggle {
+	font-size: 12px;
+	text-align: center;
+}
+
+.vertical-ruler {
+	/* visibility:hidden; */
+	stroke-width: 2.5;
+	stroke: black;
+	pointer-events: none;
+}
+
+/* #svg-export {
+	height: 23px;
+	width: 50px;
+	margin: 19px 0;
+	font-size: 11px;
+	padding: 1px 1px 1px 1px;
+} */
+
+/* .fb-share-button {
+	margin: 5px 0;
+}
+
+.twitter-share-buttonD {
+	margin: 20px 0;
+}
+
+ */
+ 
+ #kkk{
+    width: 300px;
+    margin: auto;
+    border: 1px solid red;
+}
+ 
+.navbar {
+	height: 25px;
+	margin-top: -15px;
+	margin-bottom: -15px;
+}
+
+#animation, #outline-layers, #fading-colors, #limit-ranges, #label-streamgraph, #label-stackedgraph {
+	margin-top: 1px;
+}
+
+#col-checked, #col-visualization, #col-projections {
+	font-size: 12px;
+	height: 40px;
+	border: 0.5px;
+	border-style: solid;
+	border-radius: 8px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 5px;
+}
+
+#col-projections {
+	background-color: #d5d5d5;
+}
+
+text.textLabel {
+	/* font-size:  18px;
+    paint-order: stroke;
+    stroke: white;
+    stroke-width: 1px;
+    stroke-linecap: butt;
+    stroke-linejoin: miter;
+    font-weight: 800; */
+	
+	fill: black;
+	text-transform: capitalize;
+	text-shadow: 2px 2px 8px white;
+	/* text-shadow: black 0.1em 0.1em 0.2em, black 0.1em 0.1em 0.2em; */
+}
+
+.centered-text {
+	text-align: center
+}
+
+
+pattern text {
+	font-size: 10px;
+	fill: white;
+	text-align: center;
+	display: block;
+}
+
+/* Border in Focus and Context */
+rect.f.border, rect.c.border {
+	fill: none;
+	/* stroke: black; */
+	stroke: none;
+	stroke-opacity: 1;
+	stroke-width: 1;
+}
+
+/* Grid separation in All areas to every time interval in Focus */
+.x.grid {
+	/* display: none; */
+	stroke: black;
+	stroke-width: 1;
+	fill: none;
+	shape-rendering: geometricPrecision;
+}
+
+/* Grid Local area */
+.x.grid.area0, .x.grid.area4 {
+	stroke-opacity: 0.20;
+}
+
+/* Grid Transition Left and Right area */
+.x.grid.area1, .x.grid.area3 {
+	stroke-opacity: 0.20;
+}
+
+/* Grid Detail area */
+.x.grid.area2 {
+	stroke-opacity: 0.20;
+}
+
+/* Grid separation in distortion domain */
+.x.grid .domain {
+	display: none;
+	fill: none;
+	opacity: 1;
+	stroke: blue;
+	stroke-opacity: 1; /* 0 to hide .axis line but showing the text */
+	stroke-width: 1;
+	stroke-dasharray: 3, 2;
+}
+
+#btnModal {
+	visibility: hidden;
+}
+
+.focus path {
+	/* display: none; */
+	/* shape-rendering: auto; */
+	shape-rendering: geometricPrecision;
+}
+
+.context path {
+	/* display: none; */
+	shape-rendering: geometricPrecision;
+}
+
+/* Axis in Focus */
+.focus .x.axis path, .focus .x.axis line {
+	fill: none;
+	stroke: none; /* to hide */
+	shape-rendering: crispEdges;
+}
+
+.focus .y.axis path, .focus .y.axis line {
+	fill: none;
+	stroke: grey; /* to hide */
+	shape-rendering: crispEdges;
+}
+
+/* Axis in Context */
+.context .x.axis path, .context .x.axis line {
+	fill: none; /* to hide */
+	stroke: grey;
+	/* stroke-width:10; */
+	opacity: 1.4;
+	shape-rendering: crispEdges;
+}
+
+/* Axis time text in Focus and Context */
+.y.axis text, .x.axis text {
+	fill: black;
+	font-size: 9px;
+}
+
+/* Axis label in Focus */
+.x.axis.label, .y.axis.label {
+	fill: black;
+	font-size: 11px;
+	text-transform: capitalize;
+}
+
+.brushNorRight .resize.e rect, .brushNorLeft .resize.w rect {
+	stroke: blue;
+	fill: blue;
+	opacity: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.brushDisRight .resize.e rect, .brushDisLeft .resize.w rect {
+	stroke: red;
+	fill: red;
+	opacity: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.brushZoom .resize.e rect, .brushZoom .resize.w rect {
+	stroke: grey;
+	fill: grey;
+	opacity: 1;
+	stroke-opacity: 1;
+	fill-opacity: 1;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.brushNorLeft .background, .brushDisLeft .background, .brushZoom .background,
+	.brushNorRight .background, .brushDisRight .background {
+	display: none;
+}
+
+/* LINES CONNECTION BETWEEN CONTEXT AND FOCUS */
+.lineNorLeft, .lineNorRight {
+	fill:none;
+	stroke: blue;
+	stroke-width: 1;
+	stroke-dasharray: 10, 5;
+	shape-rendering: geometricPrecision;
+}
+
+.lineDisLeft, .lineDisRight {
+	fill:none;
+	stroke: red;
+	stroke-width: 1;
+	stroke-dasharray: 10, 5;
+	shape-rendering: geometricPrecision;
+}
+
+.lineZoomLeft, .lineZoomRight {
+	fill:none;
+	stroke: grey;
+	stroke-width: 1;
+	stroke-dasharray: 10, 5;
+	shape-rendering: geometricPrecision;
+}
+/* --------------------------------------------- */
+
+/* RECTANGLES IN FOCUS */
+#linksProjetions rect {
+	/* display: none; */
+	opacity: 1;
+	stroke-width: 4;
+	fill: none;
+	visibility: hidden;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+}
+
+.focusNorLeft, .focusNorRight {
+	stroke: blue;
+}
+
+.focusDisLeft, .focusDisRight {
+	stroke: red;
+}
+
+.focusZoom {
+	stroke: grey;
+}
+
+.brushZoom .extent {
+	stroke: none;
+	fill: grey;
+	fill-opacity: 0.3;
+}
+
+.brushNorLeft .extent, .brushNorRight .extent {
+	stroke: none;
+	fill: none; /* yellow */
+	pointer-events: none;
+	display: none;
+}
+
+.brushDisLeft .extent, .brushDisRight .extent {
+	stroke: none;
+	fill: none; /* blue */
+	pointer-events: none;
+	display: none;
+}
