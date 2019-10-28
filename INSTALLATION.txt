@@ -1,4 +1,0 @@
-1 Get the code from https://github.com/erickedu85/multistream 
-2 Copy the files from the git repository to your web server (e.g. HTTP Apache Server)
-3 Go to the web page: https://your-web-server/multistream
-
