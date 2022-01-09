@@ -20,6 +20,16 @@
 <script type='text/javascript'>
 			<?php
 			$indexSelect = $_POST ["dataset"];
+
+			$name_covid = "COVID-19";
+			$fileName_covid = "data";
+			$filePath_covid = "source/covid_evolution/";
+			$timePolarity_covid =3; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+			$nTimeGranularity_covid = 1; // interval by nGranularity minimum 1 max 5
+			$getText_covid = FALSE;
+			$getQuantity_covid = TRUE;
+			$description_covid = "<strong>About: </strong>This visualization shows the COVID-19's evolution<br><strong>Period: </strong>From February 2020 to present (weekly updated)<br><strong>Periodicity: </strong>weekly (7 days)<br><strong>Dataset: </strong>This datasets comes from the <a href='https://ourworldindata.org/coronavirus-source-data' target='_blank'>Our World in Data</a> webpage. Visit the Github repository <a href='https://github.com/owid/covid-19-data/tree/master/public/data/' target='_blank'>here</a> ";
+			
 			switch ($indexSelect) {
 				case 0 :
 					$name = "Music genre evolution";
@@ -28,62 +38,191 @@
 					$timePolarity = 5; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
 					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
 					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
 					$description = "<strong>About: </strong>This visualization shows the evolution of music genres<br><strong>Period: </strong>From 1960 to 2016<br><strong>Dataset: </strong>10,642 bands. Metadata comes from MusicBrainz web site";
 					break;
 				case 1 :
-					$name = "Sentiment analysis of the 2016 US presidential election day";
-					$fileName = "2016_US_presidential_election_day";
-					$filePath = "source/2016_us_presidential_election_day/json/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 10; // interval by nGranularity minimum 1 max 5
-					$getText = TRUE; // to get the text of the values
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 US presidential election day<br><strong>Period: </strong>8-9 November, 2016 (UTC)<br><strong>Dataset: </strong>371,584 tweets with the hashtag #Hillary or #Trump";
-					break;
-				case 2 :
-					$name = "Sentiment analysis of the 2016 US second presidential debate";
-					$fileName = "2016_US_second_presidential_debate";
-					$filePath = "source/2016_us_second_presidential_debate/json/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$getText = TRUE; // to get the text of the values
-					$description = "<strong>About: </strong>Tweets collected<br><strong>Period: </strong><br><strong>Tweets: </strong>  <br><strong>Hashtag: </strong>";
-					break;
-				case 3 :
-					$name = "Sentiment analysis of the 2013 Australian presidential period";
-					$fileName = "2013_Australian_presidential_period";
-					$filePath = "source/2013_australian_presidential_period/json/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 5; // interval by nGranularity minimum 1 max 5
-					$getText = TRUE; // to get the text of the values
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2013 Australian presidential period<br><strong>Period: </strong>5-7 September, 2013 (UTC+10)<br><strong>Dataset: </strong> 122,393 tweets";
-					break;
-				case 4 :
-					$name = "Sentiment analysis of the 2016 UEFA Champions league final";
-					$fileName = "2016_UEFA_champions_league_final";
-					$filePath = "source/2016_uefa_champions_league_final/json/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$getText = TRUE; // to get the text of the values
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 UEFA Champions league final<br><strong>Period: </strong>Mai 28th, 2016 20:00-24:00 (UTC+2)<br><strong>Tweets: </strong>2,009 tweets";
-					break;
-				case 5 :
-					$name = "Sentiment analysis of a rugby union match 2014";
-					$fileName = "2014_Rugby_union_match";
-					$filePath = "source/2014_rugby_union_match/json/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$getText = TRUE; // to get the text of the values
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on a rugby union match 2014<br><strong>Period: </strong>November 22th, 2014 17:40-19:10 (UTC+2)<br><strong>Tweets: </strong>2,531 tweets with the hashtag #WAvNZ";
-					break;
-				case 6 :
 					$name = "AIDS";
 					$fileName = "multiStream_sis";
 					$filePath = "source/aids/json/" . $fileName . ".json";
 					$timePolarity = 4; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
 					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
 					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
 					$description = "<strong>About: </strong>";
+					break;					
+				case 2:
+					$name = $name_covid. ' - Total confirmed cases';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "total_cases/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
 					break;
+				case 3:
+					$name = $name_covid . ' - New confirmed cases';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_cases/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 4:
+					$name = $name_covid. ' - New confirmed cases smoothed';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_cases_smoothed/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 5:
+					$name = $name_covid. ' - Total confirmed cases per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "total_cases_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 6:
+					$name = $name_covid. ' - New confirmed cases per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_cases_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 7:
+					$name = $name_covid. ' - New confirmed cases smoothed per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_cases_smoothed_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;	
+				case 8:
+					$name = $name_covid. ' - Total deaths';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "total_deaths/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;		
+				case 9:
+					$name = $name_covid. ' - New deaths';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_deaths/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 10:
+					$name = $name_covid. ' - New deaths smoothed';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_deaths_smoothed/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;		
+				case 11:
+					$name = $name_covid. ' - Total deaths per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "total_deaths_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;
+				case 12:
+					$name = $name_covid. ' - New deaths per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_deaths_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;	
+				case 13:
+					$name = $name_covid. ' - New deaths smoothed per million';
+					$fileName = $fileName_covid;
+					$filePath = $filePath_covid . "new_deaths_smoothed_per_million/" . $fileName . ".json";
+					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
+					$getText = $getText_covid; // to get the text of the values
+					$getQuantity = $getQuantity_covid; // to get the quantity
+					$description = $description_covid;
+					break;																														
+				case 14 :
+					$name = "Sentiment analysis of the 2016 US presidential election day";
+					$fileName = "2016_US_presidential_election_day";
+					$filePath = "source/2016_us_presidential_election_day/json/" . $fileName . ".json";
+					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
+					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
+					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 US presidential election day<br><strong>Period: </strong>8-9 November, 2016 (UTC)<br><strong>Dataset: </strong>371,584 tweets with the hashtag #Hillary or #Trump";
+					break;
+				case 15 :
+					$name = "Sentiment analysis of the 2016 US second presidential debate";
+					$fileName = "2016_US_second_presidential_debate";
+					$filePath = "source/2016_us_second_presidential_debate/json/" . $fileName . ".json";
+					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
+					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
+					$description = "<strong>About: </strong>Tweets collected<br><strong>Period: </strong><br><strong>Tweets: </strong>  <br><strong>Hashtag: </strong>";
+					break;
+				case 16 :
+					$name = "Sentiment analysis of the 2013 Australian presidential period";
+					$fileName = "2013_Australian_presidential_period";
+					$filePath = "source/2013_australian_presidential_period/json/" . $fileName . ".json";
+					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = 5; // interval by nGranularity minimum 1 max 5
+					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
+					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2013 Australian presidential period<br><strong>Period: </strong>5-7 September, 2013 (UTC+10)<br><strong>Dataset: </strong> 122,393 tweets";
+					break;
+				case 17 :
+					$name = "Sentiment analysis of the 2016 UEFA Champions league final";
+					$fileName = "2016_UEFA_champions_league_final";
+					$filePath = "source/2016_uefa_champions_league_final/json/" . $fileName . ".json";
+					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
+					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
+					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 UEFA Champions league final<br><strong>Period: </strong>Mai 28th, 2016 20:00-24:00 (UTC+2)<br><strong>Tweets: </strong>2,009 tweets";
+					break;
+				case 18 :
+					$name = "Sentiment analysis of a rugby union match 2014";
+					$fileName = "2014_Rugby_union_match";
+					$filePath = "source/2014_rugby_union_match/json/" . $fileName . ".json";
+					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
+					$getText = TRUE; // to get the text of the values
+					$getQuantity = FALSE; // to get the quantity
+					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on a rugby union match 2014<br><strong>Period: </strong>November 22th, 2014 17:40-19:10 (UTC+2)<br><strong>Tweets: </strong>2,531 tweets with the hashtag #WAvNZ";
+					break;
+
+					
 			}
 			
 			$str = file_get_contents ( $filePath );
@@ -98,6 +237,9 @@
 			var nTimeGranularity = <?php echo $nTimeGranularity; ?>;
 			var fileName = <?php echo json_encode($fileName); ?>; //json_encode for the String
 			var getText = <?php echo json_encode($getText); ?>;
+			var getQuantity = <?php echo json_encode($getQuantity); ?>;
+
+			
 
 		</script>
 

@@ -75,22 +75,22 @@
 				</p>
 				<p>
 					<a
-						href="https://www.lirmm.fr/~cuenca/publications/tvcg/cuenca_et_al_2018.pdf"
+						href="https://hal-lirmm.ccsd.cnrs.fr/lirmm-01693077v1"
 						target="_blank">PDF</a> | <a href="https://youtu.be/T-Nrwif7dss"
 						target="_blank">Video</a> | <a
-						href="http://www.lirmm.fr/~cuenca/publications/tvcg/MultiStream_VIS_2018.pdf"
+						href="https://erickedu85.github.io/presentations/ecuenca_multistream_vis_2018.pdf"
 						target="_blank">Slides (presented at IEEE VIS 2018)</a>
 				</p>
 				<p align="justify" style="font-size: 12px;">
 					E. Cuenca, A. Sallaberry, F. Y. Wang, and P. Poncelet. MultiStream:
 					A Multiresolution Streamgraph Approach to Explore Hierarchical Time
 					Series. <i>IEEE Transactions on Visualization and Computer Graphics</i>,
-					24(12):3160-3173, 2018.
+					24(12):3160-3173, 2018. <a href="https://doi.org/10.1109/TVCG.2018.2796591" target="_blanck">doi: 10.1109/TVCG.2018.2796591</a>
 				</p>
 				<br>
 				<p>
 					Contact: <a href="mailto:erick.cuenca@lirmm.fr">erick.cuenca@lirmm.fr</a>
-					<a href="https://github.com/erickedu85/" target="_blank"> <span
+					<a href="https://github.com/erickedu85/multistream" target="_blank"> <span
 						class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i
 							class="fa fa-github fa-stack-1x fa-inverse"></i>
 					</span>
@@ -101,6 +101,28 @@
 			<div class="col-sm-4">
 				<h3>Datasets available</h3>
 				<ul>
+					<li>COVID-19:
+						<ul>
+							<li>Confirmed cases:</li>
+								<ul>
+									<li>Total confirmed cases</li>
+									<li>New confirmed cases</li>
+									<li>New confirmed cases smoothed</li>
+									<li>Total confirmed cases per million</li>
+									<li>New confirmed cases per million</li>
+									<li>New confirmed cases smoothed per million</li>
+								</ul>
+							<li>Confirmed deaths:</li>
+								<ul>
+									<li>Total deaths</li>
+									<li>New deaths</li>
+									<li>New deaths smoothed</li>
+									<li>Total deaths per million</li>
+									<li>New deaths per million</li>
+									<li>New deaths smoothed per million</li>
+								</ul>						
+						</ul>
+					</li>
 					<li>Sentiment analysis of political events:
 						<ul>
 							<li>2016 US presidential election day</li>
@@ -135,9 +157,25 @@
 							// Output one line until end-of-file
 							// echo '<option value="">Select...</option>';
 							$index = 0;
+							// echo '<select><option value="" selected=selected>Select an option...</option></select>';
+							// echo '<option value="" selected=selected>Select an option...</option>';
+							// echo '<option value="" selected="selected">Select an option...</option>';
 							while ( ! feof ( $myfile ) ) {
-								echo '<option value="' . $index . '">' . fgets ( $myfile ) . '</option>';
-								$index ++;
+								$curr = fgets ( $myfile ) ;
+								$bgnoptgroup = strpos($curr, "beginoptgroup");
+								$endoptgroup = strpos($curr, "endoptgroup");
+
+								if ($bgnoptgroup <> ''){
+									$optgrouplabelx = substr($curr,$bgnoptgroup + strlen("beginoptgroup"));
+									echo '<optgroup label="' . $optgrouplabelx . '">';	
+								}elseif ($endoptgroup <> ''){
+									echo '</optgroup>';
+								}else{
+									echo '<option value="' . $index . '">' . $curr  . '</option>';	
+									$index ++;
+								}					
+								// echo '<option value="' . $index . '">' . fgets ( $myfile ) . '</option>';
+								
 							}
 							fclose ( $myfile );
 							?>

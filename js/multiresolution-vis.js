@@ -46,8 +46,8 @@ var opts = {
 	//
 	//
 	//
-	minSizeTextLabel : 20,//20 Minimum label size of text in label flow
-	maxSizeTextLabel : 35,//35 Maximum label size of text in label flow
+	minSizeTextLabel : 10,//20 Minimum label size of text in label flow
+	maxSizeTextLabel : 20,//35 Maximum label size of text in label flow
 	patternTextFont : "10px Sans-Serif", //not used in path background
 	labelTextFont : "Arial",
 	toleranceTextLabel : 1,
@@ -656,7 +656,7 @@ function createSvg(){
 	screenWidth = screenWidth - 100;
 
 	/* Creation margin Focus */
-	marginFocus = {top : 15, right : 20, bottom : 100, left : 40};
+	marginFocus = {top : 15, right : 20, bottom : 100, left : 60};
 	heightFocus = screenHeight - marginFocus.top - marginFocus.bottom - 10;
 
 	/* Creation margin Context */
@@ -716,7 +716,7 @@ function createSvg(){
 	focus.append("text")
 			.attr("class", "y axis label")
 			.attr("x",0 - heightFocus / 2)
-			.attr("y", -60)
+			.attr("y", -75)
 			.attr("dy","2em")
 			.attr("transform", "rotate(-90)")
 			.text("# " + data_type);
@@ -872,7 +872,7 @@ function display() {
 		d.values.forEach(function(c){
 			sumValue = sumValue + c.value 
 		});
-		console.log(d.name + " " + sumValue);
+		// console.log(d.name + " " + sumValue);
 		return d; 
 	});
 	//	*********************************
@@ -1564,13 +1564,13 @@ function createTooltip(){
 								formatDate= d3.time.format("%d %b %Y %H:%M");
 								break;
 							case 1:// 1 hours
-								formatDate= d3.time.format("")
+								formatDate= d3.time.format("%d %b %Y")
 								break;
 							case 2: // 2 days
-								formatDate= d3.time.format("")
+								formatDate= d3.time.format("%d %b %Y")
 								break;
 							case 3: //3 week
-								formatDate= d3.time.format("")
+								formatDate= d3.time.format("%d %b %Y")
 								break;
 							case 4: // 4 month
 								formatDate= d3.time.format("%b %Y");
@@ -1601,7 +1601,7 @@ function createTooltip(){
 								.style("opacity",1)
 									var first_line = "<p class='title'>" + d.name + "</p>";
 //									var second_line = "<p class='info'> At " + formatDate(dateSelected) + " " + customTimeFormat(dateSelected) + ", " + "<strong>" + valueSelected +" "+  data_type + "</strong></p>";
-									var second_line = "<p class='info'> At " + formatDate(dateSelected) + ", " + "<strong>" + valueSelected +" "+  data_type + "</strong></p>";
+									var second_line = "<p class='info'> At " + formatDate(dateSelected) + ", " + "<strong>" + d3.format(",.2f")(valueSelected) +" "+  data_type + "</strong></p>";
 									var thrid_line = "";
 									
 									if(textsArraySelected.length!=0){
@@ -3658,18 +3658,29 @@ function preProcessing() {
 				var date_range_end = dateRange[(i + 1)];
 				var text = [];
 				var num_value = 0;
+				// console.log("getQuantity",getQuantity,leaf_node)
+				// if (getQuantity == true){
+				// 	num_value = +leaf_node.values[index_flat].quantity;
+				// 	index_flat++;
+				// }else{
+
 				
-				//values are order by date ascending
-				for(var j=index_flat; j < leaf_node.values.length; j++){
-					var raw_node = leaf_node.values[j];
-					if(raw_node.date >= date_range_begin && raw_node.date < date_range_end){
-						num_value++;
-						text = text.concat(raw_node.text);
-					}else{
-						index_flat = j;
-						break;
+					//values are order by date ascending
+					for(var j=index_flat; j < leaf_node.values.length; j++){
+						var raw_node = leaf_node.values[j];
+						if(raw_node.date >= date_range_begin && raw_node.date < date_range_end){
+							if (getQuantity == true){
+								num_value = num_value + (+raw_node.quantity)
+							}else{
+								num_value++;
+							}
+							text = text.concat(raw_node.text);
+						}else{
+							index_flat = j;
+							break;
+						}
 					}
-				}
+				// }
 				
 				var name = leaf_node.key.toLowerCase();
 				results.push({
@@ -3684,7 +3695,7 @@ function preProcessing() {
 		}
 	})
 	
-	console.log(results)
+	// console.log(results)
 //	console.log("Time preProcessing: ",(Date.now()-timerStart) + " milliseconds");
 	return results;
 }

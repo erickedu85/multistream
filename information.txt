@@ -1,0 +1,3 @@
+Title: MultiStream: A Multiresolution Streamgraph Approach to Explore Hierarchical Time Series
+Authors: Erick Cuenca, Arnaud Sallaberry, Florence Y. Wang, and Pascal Poncelet
+Operating System: This code was tested on a MacOS 11.4 Operating System

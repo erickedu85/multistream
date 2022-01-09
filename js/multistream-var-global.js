@@ -15,8 +15,8 @@ var customTimeFormat = d3.time.format.multi([
                  							[ "%H:%M", function(d) {return d.getHours();} ],
 //                 						    [ "%I:%M", function(d) { return d.getMinutes(); }],
 //                 						    [ "%I %p", function(d) { return d.getHours(); }],
-                 							[ "%a:%d", function(d) {return d.getDay() && d.getDate() != 1;} ],
-                 							[ "%b:%d", function(d) {return d.getDate() != 1;} ], 
+                 							[ "%b %d", function(d) {return d.getDay() && d.getDate() != 1;} ],
+                 							[ "%b %d", function(d) {return d.getDate() != 1;} ], 
                  							[ "%B", function(d) {return d.getMonth();} ], 
                  							[ "%Y", function(d) {return d.getYear();} ] 
                  	                    ]);
@@ -76,7 +76,11 @@ function addingKey(d,index){
 $(document).ready(function() {
 	dataset = jsonArray.data.map(function(d, i) {
 //		console.log(d.text); 
-		return {"date":parseDate(d.date_time), "value": d.value, "text":d.text };
+		quanty = 0
+		if(getQuantity == true){
+			quanty = d.quantity
+		}
+		return {"date":parseDate(d.date_time), "value": d.value, "text":d.text ,"quantity":quanty};
 //		return {"date":parseDate(d.date_time), "value": d.value };
 	});
 	
@@ -101,7 +105,7 @@ $(document).ready(function() {
 	
 	data_type = jsonArray.type;
 	
-	console.log(jsonArray.ranges)
+	// console.log(jsonArray.ranges)
 	
 	//tree.nodes add: children, depth, name, x, y
 	hierarchy = tree.nodes(jsonArray.ranges).reverse();//array of objects
