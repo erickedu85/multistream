@@ -154,12 +154,9 @@
 							<?php
 							header ( 'content-type: text/html; charset=utf-8' );
 							$myfile = fopen ( "php/select-option.txt", "r" ) or die ( "Unable to open file select-option.txt in php/!" );
-							// Output one line until end-of-file
-							// echo '<option value="">Select...</option>';
+							
 							$index = 0;
-							// echo '<select><option value="" selected=selected>Select an option...</option></select>';
-							// echo '<option value="" selected=selected>Select an option...</option>';
-							// echo '<option value="" selected="selected">Select an option...</option>';
+							
 							while ( ! feof ( $myfile ) ) {
 								$curr = fgets ( $myfile ) ;
 								$bgnoptgroup = strpos($curr, "beginoptgroup");
@@ -174,7 +171,6 @@
 									echo '<option value="' . $index . '">' . $curr  . '</option>';	
 									$index ++;
 								}					
-								// echo '<option value="' . $index . '">' . fgets ( $myfile ) . '</option>';
 								
 							}
 							fclose ( $myfile );
