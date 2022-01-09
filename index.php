@@ -162,10 +162,10 @@
 								$bgnoptgroup = strpos($curr, "beginoptgroup");
 								$endoptgroup = strpos($curr, "endoptgroup");
 
-								if ($bgnoptgroup <> ''){
+								if ($bgnoptgroup !== false){
 									$optgrouplabelx = substr($curr,$bgnoptgroup + strlen("beginoptgroup"));
 									echo '<optgroup label="' . $optgrouplabelx . '">';	
-								}elseif ($endoptgroup <> ''){
+								}elseif ($endoptgroup !== false){
 									echo '</optgroup>';
 								}else{
 									echo '<option value="' . $index . '">' . $curr  . '</option>';	
