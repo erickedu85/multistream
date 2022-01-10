@@ -82,14 +82,14 @@
 						target="_blank">Slides (presented at IEEE VIS 2018)</a>
 				</p>
 				<p align="justify" style="font-size: 12px;">
-					E. Cuenca, A. Sallaberry, F. Y. Wang, and P. Poncelet. MultiStream:
+					Erick Cuenca, Arnaud Sallaberry, Florence Y. Wang, and Pascal Poncelet. MultiStream:
 					A Multiresolution Streamgraph Approach to Explore Hierarchical Time
 					Series. <i>IEEE Transactions on Visualization and Computer Graphics</i>,
 					24(12):3160-3173, 2018. <a href="https://doi.org/10.1109/TVCG.2018.2796591" target="_blanck">doi: 10.1109/TVCG.2018.2796591</a>
 				</p>
 				<br>
 				<p>
-					Contact: <a href="mailto:erick.cuenca@lirmm.fr">erick.cuenca@lirmm.fr</a>
+					Contact: <a href="mailto:ecuenca@yachaytech.edu.ec">ecuenca@yachaytech.edu.ec</a>
 					<a href="https://github.com/erickedu85/multistream" target="_blank"> <span
 						class="fa-stack fa-lg"> <i class="fa fa-circle fa-stack-2x"></i> <i
 							class="fa fa-github fa-stack-1x fa-inverse"></i>
@@ -101,7 +101,7 @@
 			<div class="col-sm-4">
 				<h3>Datasets available</h3>
 				<ul>
-					<li>COVID-19:
+					<li>COVID-19's evolution:
 						<ul>
 							<li>Confirmed cases:</li>
 								<ul>

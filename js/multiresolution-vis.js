@@ -782,38 +782,50 @@ function display() {
 		case 0: 
 			dateMinRange = d3.time.minute.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.minute.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.minutes(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.minute.floor(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.minute.ceil(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.minutes(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 		case 1: 
 			dateMinRange = d3.time.hour.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.hour.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.hours(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.hour.floor(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.hour.ceil(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.hours(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 		case 2: 
 			dateMinRange = d3.time.day.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.day.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.days(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.day.floor(d3.time.day.offset(d3.time.day.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.day.ceil(d3.time.day.offset(d3.time.day.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.days(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 		case 3: 
 			dateMinRange = d3.time.week.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.week.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.weeks(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.week.floor(d3.time.week.offset(d3.time.week.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.week.ceil(d3.time.week.offset(d3.time.week.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.weeks(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 		case 4: 
 			dateMinRange = d3.time.month.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.month.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.months(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.month.floor(d3.time.month.offset(d3.time.month.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.month.ceil(d3.time.month.offset(d3.time.month.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.months(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 		case 5: 
 			dateMinRange = d3.time.year.floor(dateExtRange[0]), // min date
 			dateMaxRange = d3.time.year.ceil(dateExtRange[1]); // max date
-			dateRange = d3.time.years(dateMinRange,dateMaxRange, nTimeGranularity);
+			dateMinRangeDS = d3.time.year.floor(d3.time.year.offset(d3.time.year.ceil(dateExtRange[0]), -1*nTimeGranularity));
+			dateMaxRangeDS = d3.time.year.ceil(d3.time.year.offset(d3.time.year.ceil(dateExtRange[1]), +2*nTimeGranularity));
+			dateRange = d3.time.years(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
 			break;
 	}
 
-//	console.log("dateMinRange: " + dateMinRange)
-//	console.log("dateMaxRange: " + dateMaxRange)
-//	console.log("dateRange: " + dateRange)
+	console.log("dateMinRange: " + dateMinRange)
+	console.log("dateMaxRange: " + dateMaxRange)
+	// console.log("dateRange: " + dateRange)
 	
 	/* HIJOS AND PADRES  */
 	// preProcessing is a function to divide a data by range de time and range of R0, R1, R3, R4
@@ -3658,11 +3670,9 @@ function preProcessing() {
 				var date_range_end = dateRange[(i + 1)];
 				var text = [];
 				var num_value = 0;
-				// console.log("getQuantity",getQuantity,leaf_node)
-				// if (getQuantity == true){
-				// 	num_value = +leaf_node.values[index_flat].quantity;
-				// 	index_flat++;
-				// }else{
+				// console.log('date begin',date_range_begin)
+				// console.log('date end',date_range_end)
+				// console.log('')
 
 				
 					//values are order by date ascending
