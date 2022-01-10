@@ -27,7 +27,33 @@ Streamgraph, Stacked Graph, Time Series, Aggregation, Multiresolution Visualizat
 ## Links
 [Website and datasets](http://advanse.lirmm.fr/multistream/) | [PDF](https://hal-lirmm.ccsd.cnrs.fr/lirmm-01693077v1 "PDF") | [Video](https://www.youtube.com/watch?v=T-Nrwif7dss "Video") | [Slides (presented at IEEE VIS 2018)](https://erickedu85.github.io/presentations/ecuenca_multistream_vis_2018.pdf "Slides (presented at IEEE VIS 2018)")
 
-[Contact Us](mailto:erick.cuenca@lirmm.fr)
+[Contact us](mailto:ecuenca@yachaytech.edu.ec)
+
+## [Available datasets](http://advanse.lirmm.fr/multistream/)
+- COVID-19's evolution:
+    - Confirmed cases:
+        - Total confirmed cases
+        - New confirmed cases
+        - New confirmed cases smoothed
+        - Total confirmed cases per million
+        - New confirmed cases per million
+        - New confirmed cases smoothed per million
+    - Confirmed deaths:
+        - Total deaths
+        - New deaths
+        - New deaths smoothed
+        - Total deaths per million
+        - New deaths per million
+        - New deaths smoothed per million
+- Sentiment analysis of political events:
+    - 2016 US presidential election day
+    - 2013 Australian presidential period
+- Sentiment analysis of sporting events:
+    - 2016 UEFA Champions league final
+    - 2014 Rugby union match
+- Other datasets:
+    - Music genre evolution
+    - AIDS user forums
 
 ## Programming language
 Javascript JS
