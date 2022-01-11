@@ -17,7 +17,7 @@ var customTimeFormat = d3.time.format.multi([
 //                 						    [ "%I %p", function(d) { return d.getHours(); }],
                  							[ "%b %d", function(d) {return d.getDay() && d.getDate() != 1;} ],
                  							[ "%b %d", function(d) {return d.getDate() != 1;} ], 
-                 							[ "%B", function(d) {return d.getMonth();} ], 
+                 							[ "%b", function(d) {return d.getMonth();} ], 
                  							[ "%Y", function(d) {return d.getYear();} ] 
                  	                    ]);
 

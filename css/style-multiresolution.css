@@ -272,9 +272,17 @@ rect.f.border, rect.c.border {
 }
 
 /* Axis time text in Focus and Context */
-.y.axis text, .x.axis text {
+.y.axis text {
 	fill: black;
-	font-size: 9px;
+	/* font-size: 9px; */
+	font-size: 1rem;
+}
+
+/* Axis time text in Focus and Context */
+.x.axis text {
+	fill: black;
+	/* font-size: 9px; */
+	font-size: 1.2rem;
 }
 
 /* Axis label in Focus */

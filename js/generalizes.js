@@ -534,6 +534,35 @@ function exportToCsv(filename, rows) {
     }
 }
 
+//interval.offset(date, step)
+function getTimeOffset(start, offset, polaridad){
+	let timeOffset; 
+	switch(polaridad){
+		case 0:
+			timeOffset = d3.time.minute.offset(start, offset);
+			break;
+		case 1:
+			timeOffset = d3.time.hour.offset(start, offset);
+			break;
+		case 2:
+			timeOffset = d3.time.day.offset(start, offset);
+			break;
+		case 3:
+			timeOffset = d3.time.week.offset(start, offset);
+			break;			
+		case 4:
+			timeOffset = d3.time.month.offset(start, offset);
+			break;
+		case 5:
+			timeOffset = d3.time.year.offset(start, offset);
+			break;
+		default:
+			console.log("getTimeOffset")
+			break;
+	}
+	return timeOffset;
+	}
+
 //function updateTransitionFocus() {
 //	/* FOCUS */
 //	/**

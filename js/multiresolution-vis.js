@@ -46,11 +46,11 @@ var opts = {
 	//
 	//
 	//
-	minSizeTextLabel : 10,//20 Minimum label size of text in label flow
-	maxSizeTextLabel : 20,//35 Maximum label size of text in label flow
+	minSizeTextLabel : 15,//20 Minimum label size of text in label flow
+	maxSizeTextLabel : 31,//35 Maximum label size of text in label flow
 	patternTextFont : "10px Sans-Serif", //not used in path background
 	labelTextFont : "Arial",
-	toleranceTextLabel : 1,
+	toleranceTextLabel : 7,
 	//
 	//
 	x_axis_label_context : "",
@@ -440,7 +440,53 @@ function loadMultiresolutionVis(){
 	
 	createSvg(); //create svg main and axes
 	display(); //jsonArray.hierarchy is from .json file
-	
+
+	let isPressedCtrl = false;
+
+	document.onkeydown = (e)=>{
+
+		let isBrushLockLeft = false;
+		let isBrushLockRight = false;
+		let stampTemporal; 
+		let moving=false;
+
+		if (e.keyCode == 16){
+			isPressedCtrl = true;
+		}
+		switch(e.keyCode){
+			case 39: // ->
+				stampTemporal = 1;
+				moving=true;
+				if(isPressedCtrl){
+					isBrushLockLeft = true;
+					isBrushLockRight = false;
+				}
+				break;
+			case 37: // <-
+				stampTemporal = -1;
+				moving=true;
+				if(isPressedCtrl){
+					isBrushLockLeft = false;
+					isBrushLockRight = true;
+				}
+				break;
+		}
+
+
+		if(moving){
+			moveContextByKeyboard(stampTemporal,isBrushLockLeft,isBrushLockRight);		
+		}
+
+
+	};
+
+	document.onkeyup = (e)=>{
+		//e.ctrlKey the same
+		if (e.keyCode == 16){
+			isPressedCtrl = false;
+		}
+	};
+
 	d3.select("#close-alert").on("click",function(d){
 		document.getElementById("alert-msg").classList.toggle("hidden");
 	});
@@ -2877,11 +2923,15 @@ function timeParser(time) {
 }
 
 
-function brushContextMove() {
+function brushContextMove(jj) {
 	
-	extent0 = brushContext.extent();
-	extent1 = loadExtent1(extent0);
-	d3.select(this).call(brushContext.extent(extent1));		
+
+	let extent1 = loadExtent1(jj);	
+	context.select(".brushZoom").call(brushContext.extent(extent1));
+
+	// extent0 = brushContext.extent();
+	// extent1 = loadExtent1(extent0);
+	// d3.select(this).call(brushContext.extent(extent1));		
 	
 	// Distortion Areas
 	var facteurBrusDisLeft;
@@ -3071,6 +3121,11 @@ function brushContextMove() {
 	
 	
 	updateRectanglesAndLinksInFocus();
+	
+	if(!validatorBrushes()){
+		backContext();
+		return;
+	}
 	
 	// ANIMATION
 	callAnimation();
@@ -4229,7 +4284,9 @@ function createBrushInContext(){
 					.x(xScaleContext)
 					.extent(extentBrushContext)
 					.on("brushstart",brushStart)
-					.on("brush", brushContextMove)
+					.on("brush",function(d){
+						brushContextMove(brushContext.extent())
+					})
 					.on("brushend", brushEnd);
 	
 	//NorLeft
@@ -4298,4 +4355,44 @@ function updateMainTitleVis(timePeriod,quantitative){
 	textMainTitle = "At " + timePeriod + ", " + quantitative;
 	
 	document.getElementById("main-title-vis").innerHTML = textMainTitle;
+}
+
+function moveContextByKeyboard(cuantosPasosTemporal, blockLeft, blockRight){
+
+	let newTimeExtentLeft = brushContext.extent()[0];
+	if(!blockLeft){
+		newTimeExtentLeft = getNewTimeStep(newTimeExtentLeft,cuantosPasosTemporal)
+	}
+	
+	let newTimeExtentRight = brushContext.extent()[1];
+	if (!blockRight){
+		newTimeExtentRight = getNewTimeStep(newTimeExtentRight,cuantosPasosTemporal)
+	}
+
+	brushContextMove([newTimeExtentLeft,newTimeExtentRight]);
+
+}
+
+function getNewTimeStep(currTimeStep,howManySteps){
+	
+	return getTimeOffset(currTimeStep,howManySteps*nTimeGranularity,timePolarity);
+}
+
+function validatorBrushes(){
+
+	let limitNorLeft = brushContextNorLeft.extent()[0];
+	let limitDisLeft = brushContextDisLeft.extent()[0];
+	let limitZoomLeft = brushContext.extent()[0];
+	let limitZoomRight = brushContext.extent()[1];
+	let limitDisRight = brushContextDisRight.extent()[1];
+	let limitNorRight = brushContextNorRight.extent()[1];
+
+	
+	if(limitNorLeft<limitDisLeft 
+		&& limitDisLeft<limitZoomLeft 
+		&& limitZoomRight<limitDisRight
+		&& limitDisRight<limitNorRight){
+			return true;
+		}
+	return false;
 }
