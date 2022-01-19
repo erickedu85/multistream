@@ -72,7 +72,7 @@ Go to the Apache Web root directory (e.g., /var/www/html/ in ubuntu):
 
 Clone this repository:
     
-    $ git clone https://github.com/erickedu85/multistream/
+    $ sudo git clone https://github.com/erickedu85/multistream/
 
 Restart the Apache Web Server:
 

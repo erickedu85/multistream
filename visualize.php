@@ -18,6 +18,7 @@
 
 
 <script type='text/javascript'>
+			<?php ini_set("memory_limit","256M");?>
 			<?php
 			$indexSelect = $_POST ["dataset"];
 
