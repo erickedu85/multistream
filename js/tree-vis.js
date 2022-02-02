@@ -1,5 +1,5 @@
 screenHeight = window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight;
-if(getQuantity==true){
+if(isLargeTree==true){
 	screenHeight = 6000
 }
 

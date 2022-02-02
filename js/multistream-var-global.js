@@ -1,4 +1,5 @@
-var parseDate = d3.time.format("%d/%m/%Y %H:%M:%S").parse;
+// var parseDate = d3.time.format("%d/%m/%Y %H:%M:%S").parse;
+var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S.000Z").parse;
 var dataset;
 var dataset_nested = [];
 var hierarchy;
@@ -26,6 +27,7 @@ var color_begin_range = "white";
 var color_range_children;
 var num_leaf_children;
 var child_index;
+var leaf_level = [];
 
 function setNumChildrenLeaf(d){
 	if(d.children){
@@ -72,59 +74,47 @@ function addingKey(d,index){
 		d.visible = true;
 	}
 }
+var dateExtRange;
+var dateMinRange; 
+var dateMaxRange; 
+var dateRange;
 
 $(document).ready(function() {
-	dataset = jsonArray.data.map(function(d, i) {
-//		console.log(d.text); 
-		quanty = 0
-		if(getQuantity == true){
-			quanty = d.quantity
-		}
-		return {"date":parseDate(d.date_time), "value": d.value, "text":d.text ,"quantity":quanty};
-//		return {"date":parseDate(d.date_time), "value": d.value };
+
+	let unique_dates = new Set()
+	leaf_level = jsonArray.data.map(function(d, i) {
+		unique_dates.add(d.date_time) //d.date_time is a string at this point
+		return {"date":parseDate(d.date_time), "value": d.value, 'name':d.category, 'key':d.key, 'text':'' };
 	});
 	
-//	console.log("finish parse date")
-	
-	dataset_nested = nest_by_name.entries(dataset);
-	//sort the dataset_nested by Date
-	dataset_nested.forEach(function(leaf_node){
-		leaf_node.values.sort(function (a, b) {
-					  if (a.date > b.date) {
-						    return 1;
-						  }
-					  if (a.date < b.date) {
-					    return -1;
-					  }
-					  return 0;
-				});
+	dateRange = Array.from(unique_dates).map(d=>{
+		return parseDate(d)
 	})
-	
-//	console.log("finish nested function")
-//	console.log(dataset_nested);
+
+	dateMinRange = dateRange[0]
+	dateMaxRange = dateRange[dateRange.length-1]
+	dateExtRange = [dateMinRange,dateMaxRange]
+
+	// console.log(dateExtRange)
+
 	
 	data_type = jsonArray.type;
 	
-	// console.log(jsonArray.ranges)
-	
+	hierarchy = tree.nodes(jsonArray.ranges)//.reverse();// array of objects
+
 	//tree.nodes add: children, depth, name, x, y
-	hierarchy = tree.nodes(jsonArray.ranges).reverse();//array of objects
-	hierarchy[hierarchy.length-1].key = root_key;
-	hierarchy[hierarchy.length-1].color = root_color;
+	// hierarchy = tree.nodes(jsonArray.ranges).reverse();//array of objects
+	// hierarchy[hierarchy.length-1].key = root_key;
+	// hierarchy[hierarchy.length-1].color = root_color;
 	num_initial_color = getNodesByDepth(1).length;
-	hierarchy[hierarchy.length-1].children.reverse().forEach(addingKey);//reverse() start from root to down
+	// hierarchy[hierarchy.length-1].children.reverse().forEach(addingKey);//reverse() start from root to down
 	
-//	hierarchy[0].key = root_key;
-//	hierarchy[0].color = root_color;
-//	hierarchy[0].children.forEach(addingKey);//reverse() start from root to down
-	//hierarchy[0].children.forEach(addingKey);//As [0] contains all structure
+	// console.log(hierarchy)
 
 	//Loading VIS
 	loadMultiresolutionVis();
-//	console.log("finish load multiresolution view")
 	loadTreeVis();
-//	console.log("finish loadtree view")
-	
+
 	//
 	document.getElementById("loader").style.display = "none";
 //	document.getElementById("cm-menu").style.display = "inherit";

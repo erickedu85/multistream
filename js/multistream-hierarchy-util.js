@@ -35,7 +35,7 @@ function getFatherDisponible(node_key){
 
 
 function hijos(bottom_nodes){
-	bottom_nodes.reverse();
+	bottom_nodes//.reverse();
 	nivel_bajo = [];
 	bottom_nodes.forEach(function(bottom_node){
 		
@@ -207,10 +207,10 @@ function mergingChildren(father, children){
 		for(var i = 0; i < ds_child.length; i++) {
 			if(!fusion[i]){
 				valor = ds_child[i].value;
-				texto = ds_child[i].text;
+				// texto = ds_child[i].text;
 			}else{
 				valor = fusion[i].value + ds_child[i].value;
-				texto = fusion[i].text.concat(ds_child[i].text);
+				// texto = fusion[i].text.concat(ds_child[i].text);
 			}
 			var fecha = ds_child[i].date;
 			var obj = {key:father.key,name:father.name,date:fecha,value:valor,text:texto};
@@ -241,7 +241,7 @@ function getChild(child){
 
 function papas(top_nodes){
 	nivel_alto = [];
-	top_nodes.reverse();
+	top_nodes//.reverse();
 	top_nodes.forEach(function(top_node){
 //		console.log("analizando",top_node)
 		var hierarchy_node = getNodeByKey(top_node);
@@ -307,6 +307,7 @@ function getLeafNodes(){
 }
 
 function getNodeByKey(node_key){
+	// console.log('node by key')
 	var index = hierarchy.map(function(o) { return o.key; }).indexOf(node_key);
 	return hierarchy[index];
 }

@@ -211,10 +211,10 @@ var sNorRight;
 var iNorLeft; 
 var iZoom; 
 var iNorRight;
-var dateExtRange; 
-var dateMinRange; 
-var dateMaxRange; 
-var dateRange;
+// var dateExtRange; 
+// var dateMinRange; 
+// var dateMaxRange; 
+// var dateRange;
 
 var patternFocusFond;
 var gradientFocusRight; 
@@ -257,7 +257,8 @@ function updateFlows(){
 		node.name = node_hierarchy.name;
 		
 		if(opts.fadingColors){
-			node.color = node_hierarchy.color.desaturate().brighten(opts.fadingColorsFactor);
+			// node.color = node_hierarchy.color.desaturate().brighten(opts.fadingColorsFactor);
+			node.color = chroma(node_hierarchy.color).desaturate().brighten(opts.fadingColorsFactor);
 		}else{
 			node.color = node_hierarchy.color;
 		}
@@ -809,7 +810,7 @@ function createSvg(){
 var key_bottom_list = [];
 var key_top_list = [];
 
-var leaf_level = [];
+
 var nivel_bajo = [];
 var nivel_alto = [];
 var children_visible_list = [];
@@ -818,82 +819,88 @@ var children_bottom_list = [];
 
 
 function display() {
-	dateExtRange = d3.extent(dataset, function(d) {return d.date;}); // max and min date
 	
-//	console.log("timePolarity" + timePolarity)
-//	console.log("nTimeGranularity" + nTimeGranularity)
+	// dateExtRange = d3.extent(leaf_level, function(d) {return d.date;}); // max and min date
+
+	// dateExtRange = [leaf_level[0]['date']]
+	// console.log(leaf_level[0]['date'])
+
+	// console.log(dateExtRange)
+	//	console.log("nTimeGranularity" + nTimeGranularity)
 	
 	//DATES Ranges
-	switch (timePolarity) {
-		case 0: 
-			dateMinRange = d3.time.minute.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.minute.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.minute.floor(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.minute.ceil(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.minutes(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-		case 1: 
-			dateMinRange = d3.time.hour.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.hour.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.hour.floor(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.hour.ceil(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.hours(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-		case 2: 
-			dateMinRange = d3.time.day.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.day.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.day.floor(d3.time.day.offset(d3.time.day.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.day.ceil(d3.time.day.offset(d3.time.day.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.days(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-		case 3: 
-			dateMinRange = d3.time.week.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.week.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.week.floor(d3.time.week.offset(d3.time.week.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.week.ceil(d3.time.week.offset(d3.time.week.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.weeks(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-		case 4: 
-			dateMinRange = d3.time.month.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.month.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.month.floor(d3.time.month.offset(d3.time.month.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.month.ceil(d3.time.month.offset(d3.time.month.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.months(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-		case 5: 
-			dateMinRange = d3.time.year.floor(dateExtRange[0]), // min date
-			dateMaxRange = d3.time.year.ceil(dateExtRange[1]); // max date
-			dateMinRangeDS = d3.time.year.floor(d3.time.year.offset(d3.time.year.ceil(dateExtRange[0]), -1*nTimeGranularity));
-			dateMaxRangeDS = d3.time.year.ceil(d3.time.year.offset(d3.time.year.ceil(dateExtRange[1]), +2*nTimeGranularity));
-			dateRange = d3.time.years(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
-			break;
-	}
+	// switch (timePolarity) {
+	// 	case 0: 
+	// 		dateMinRange = d3.time.minute.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.minute.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.minute.floor(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.minute.ceil(d3.time.minute.offset(d3.time.minute.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.minutes(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// 	case 1: 
+	// 		dateMinRange = d3.time.hour.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.hour.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.hour.floor(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.hour.ceil(d3.time.hour.offset(d3.time.hour.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.hours(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// 	case 2: 
+	// 		dateMinRange = d3.time.day.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.day.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.day.floor(d3.time.day.offset(d3.time.day.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.day.ceil(d3.time.day.offset(d3.time.day.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.days(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// 	case 3: 
+	// 		dateMinRange = d3.time.week.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.week.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.week.floor(d3.time.week.offset(d3.time.week.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.week.ceil(d3.time.week.offset(d3.time.week.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.weeks(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// 	case 4: 
+	// 		dateMinRange = d3.time.month.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.month.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.month.floor(d3.time.month.offset(d3.time.month.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.month.ceil(d3.time.month.offset(d3.time.month.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.months(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// 	case 5: 
+	// 		dateMinRange = d3.time.year.floor(dateExtRange[0]), // min date
+	// 		dateMaxRange = d3.time.year.ceil(dateExtRange[1]); // max date
+	// 		dateMinRangeDS = d3.time.year.floor(d3.time.year.offset(d3.time.year.ceil(dateExtRange[0]), -1*nTimeGranularity));
+	// 		dateMaxRangeDS = d3.time.year.ceil(d3.time.year.offset(d3.time.year.ceil(dateExtRange[1]), +2*nTimeGranularity));
+	// 		dateRange = d3.time.years(dateMinRangeDS,dateMaxRangeDS, nTimeGranularity);
+	// 		break;
+	// }
 
-	console.log("dateMinRange: " + dateMinRange)
-	console.log("dateMaxRange: " + dateMaxRange)
+	// console.log("dateMinRange: " + dateMinRange)
+	// console.log("dateMaxRange: " + dateMaxRange)
 	// console.log("dateRange: " + dateRange)
 	
+	// leaf_level = dataset
+	// console.log(leaf_level)
 	/* HIJOS AND PADRES  */
 	// preProcessing is a function to divide a data by range de time and range of R0, R1, R3, R4
-	leaf_level = preProcessing();
+	//leaf_level = preProcessing();
 	
 	//REVERSER JUSTE BEFORE CALCULE
-	hierarchy.forEach(function(node){
-		if(node.children){
-			var fusion = mergingChildren(node, node.children);
-			leaf_level = leaf_level.concat(fusion);
+	// hierarchy.forEach(function(node){
+	// 	if(node.children){
+	// 		var fusion = mergingChildren(node, node.children);
+	// 		leaf_level = leaf_level.concat(fusion);
 
-			if(!node.color){
-				if(node.children.length == 1){
-					node.color = node.children[0].color;
-				}else{
-					for(var i=0;i<node.children.length-1;i++){
-						node.color = chroma.blend(node.children[i].color, node.children[(i+1)].color, 'darken');	
-					}
-				}
-			}
-		}
-	})
+	// 		if(!node.color){
+	// 			if(node.children.length == 1){
+	// 				node.color = node.children[0].color;
+	// 			}else{
+	// 				for(var i=0;i<node.children.length-1;i++){
+	// 					node.color = chroma.blend(node.children[i].color, node.children[(i+1)].color, 'darken');	
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+	// })
 //	hierarchy.reverse();
 	//REVERSE AFTER CALCULE
 	
@@ -2381,7 +2388,7 @@ function createGradientArrays(bottom_list) {
 		
 //		var colorBegin = hierarchy_father_node.color; // GetRGBColorString(66); //.desaturate().brighten(1.2)
 		if(opts.fadingColors){
-			colorBegin = hierarchy_father_node.color.desaturate().brighten(opts.fadingColorsFactor); // GetRGBColorString(66); //.desaturate().brighten(1.2)	
+			colorBegin = chroma(hierarchy_father_node.color).desaturate().brighten(opts.fadingColorsFactor); // hierarchy_father_node.color.desaturate().brighten(opts.fadingColorsFactor); // GetRGBColorString(66); //.desaturate().brighten(1.2)	
 		}else{
 			colorBegin = hierarchy_father_node.color;
 		}
@@ -3700,69 +3707,6 @@ function sacarSuma(d){
 			console.log("    contando de",ee.name,ee.value);
 		})
 	}
-}
-
-//Calcular el numero de valores solo para el mas bajo nivel de la jerarquia
-//Porque despues la estructura jerarquica agrupa las categorias
-/**
- * 
- * 
- * @param dataset_nested
- *            dataset nested by name of leaf_nodes
- * @returns {Array}
- */
-function preProcessing() {
-	var timerStart = Date.now();
-	var results = [];
-	
-	dataset_nested.forEach(function(leaf_node){
-		var hierarchy_node = getNodeByName(leaf_node.key);
-		
-		if(hierarchy_node != null){
-			var index_flat = 0;
-			for (var i = 0; i < dateRange.length; i++) {
-				var date_range_begin = dateRange[i]; 
-				var date_range_end = dateRange[(i + 1)];
-				var text = [];
-				var num_value = 0;
-				// console.log('date begin',date_range_begin)
-				// console.log('date end',date_range_end)
-				// console.log('')
-
-				
-					//values are order by date ascending
-					for(var j=index_flat; j < leaf_node.values.length; j++){
-						var raw_node = leaf_node.values[j];
-						if(raw_node.date >= date_range_begin && raw_node.date < date_range_end){
-							if (getQuantity == true){
-								num_value = num_value + (+raw_node.quantity)
-							}else{
-								num_value++;
-							}
-							text = text.concat(raw_node.text);
-						}else{
-							index_flat = j;
-							break;
-						}
-					}
-				// }
-				
-				var name = leaf_node.key.toLowerCase();
-				results.push({
-					"key":hierarchy_node.key,
-					"name":name,
-					"date":date_range_begin,
-					"value":num_value,
-					"text":""
-				})
-				//console.log(results);
-			}
-		}
-	})
-	
-	// console.log(results)
-//	console.log("Time preProcessing: ",(Date.now()-timerStart) + " milliseconds");
-	return results;
 }
 
 /**
