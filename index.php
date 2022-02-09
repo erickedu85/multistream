@@ -45,7 +45,7 @@
 
 			<div class="text-center">
 				<iframe width="75%" height="370"
-					src="http://www.youtube.com/embed/T-Nrwif7dss?rel=0"
+					src="https://www.youtube.com/embed/T-Nrwif7dss"
 					frameborder="0" webkitallowfullscreen mozallowfullscreen
 					allowfullscreen></iframe>
 			</div>
