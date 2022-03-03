@@ -1,7 +1,4 @@
-screenHeight = window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight;
-if(isLargeTree==true){
-	screenHeight = 6000
-}
+var treeHeight 
 
 var opts_tree = {
 	hDepth : 90,
@@ -13,11 +10,10 @@ var opts_tree = {
 
 
 var margin = {top: 0, right: 120, bottom: 50, left: 60},
-    width = 560 - margin.right - margin.left,
-    height = screenHeight - margin.top - margin.bottom; //screenHeight 1050
+    width = 560 - margin.right - margin.left;
 
-var tree = d3.layout.tree()
-					.size([height, width]);
+var tree = d3.layout.tree();
+					// .size([height, width]);
 
 var diagonal = d3.svg.diagonal()
 					.projection(function(d) { return [d.y, d.x]; });
@@ -32,15 +28,21 @@ var links;
 var linkNivelTop=[];
 var linkNivelBottom=[];
 
-svg_tree_vis = d3.select("body").select("#tree-vis")
-				    .attr("width", width + margin.right + margin.left)
-				    .attr("height", height + margin.top + margin.bottom)
-				  .append("g")
-				    .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
-				    ;
+
 
 
 function loadTreeVis(){
+
+	height = (treeHeight + 50) - margin.top - margin.bottom;
+	
+	svg_tree_vis = d3.select("body").select("#tree-vis")
+						.attr("width", width + margin.right + margin.left)
+						.attr("height", height + margin.top + margin.bottom)
+					.append("g")
+						.attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+						;
+					
+
 	root = hierarchy; //hierarchy[0] => root
 	root.x0 = 0;
 	root.y0 = 0;
@@ -48,8 +50,9 @@ function loadTreeVis(){
 	update(root);
 	tooltip_tree = d3.select("#cm-menu-content").append("div")
 												.attr("id", "tooltip-tree")
-					
-												
+	
+	
+
 }
 
 //d3.select(self.frameElement).style("height", "800px");

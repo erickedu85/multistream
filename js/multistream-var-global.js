@@ -37,6 +37,44 @@ function setNumChildrenLeaf(d){
 	}
 }
 
+function getTimePolarityGranularity(dateOne, dateTwo){
+	// https://github.com/d3/d3-time-format
+
+	let getTimePolarity = d3.time.format.multi([
+		[ "0", function(d) { return d.getMinutes(); }],
+		[ "1", function(d) { return d.getHours(); }],
+		[ "2", function(d) {return d.getDay() && d.getDate() != 1;} ],
+		[ "3", function(d) {return d.getDate() != 1;} ], 
+		[ "4", function(d) {return d.getMonth();} ], 
+		[ "5", function(d) {return d.getYear();} ] 
+	]);
+
+	let getValueTimeGranularity = d3.time.format.multi([ 
+		[ "%M", function(d) { return d.getMinutes(); }],
+		[ "%H", function(d) { return d.getHours(); }],
+		[ "%d", function(d) {return d.getDay() && d.getDate() != 1;} ],
+		[ "%U", function(d) {return d.getDate() != 1;} ], 
+		[ "%m", function(d) {return d.getMonth();} ], 
+		[ "%Y", function(d) {return d.getYear();} ] 
+	]);
+
+	let timePolarity = parseInt(getTimePolarity(dateOne));
+	let timeGranularity = getValueTimeGranularity(dateTwo) - getValueTimeGranularity(dateOne);
+
+	return [timePolarity,timeGranularity]
+}
+
+function getNumLeafNodes(jerarquia){
+	let leaf_nodes = [];
+	jerarquia.forEach(function(node){
+		if(!node.children && node.visible == true){
+			leaf_nodes.push(node.key);
+		}
+	})
+	return leaf_nodes.length;
+}
+
+
 var num_initial_color;
 function addingKey(d,index){
 //	console.log(d.name)
@@ -79,8 +117,11 @@ var dateMinRange;
 var dateMaxRange; 
 var dateRange;
 
-$(document).ready(function() {
+var timePolarity;
+var nTimeGranularity;
 
+$(document).ready(function() {
+	
 	let unique_dates = new Set()
 	leaf_level = jsonArray.data.map(function(d, i) {
 		unique_dates.add(d.date_time) //d.date_time is a string at this point
@@ -95,21 +136,27 @@ $(document).ready(function() {
 	dateMaxRange = dateRange[dateRange.length-1]
 	dateExtRange = [dateMinRange,dateMaxRange]
 
-	// console.log(dateExtRange)
+	// getting time polarity and granularity
+	let timeFeatures = getTimePolarityGranularity(dateRange[0],dateRange[1]);
+	timePolarity = timeFeatures[0];
+	nTimeGranularity = timeFeatures[1];
 
-	
 	data_type = jsonArray.type;
-	
-	hierarchy = tree.nodes(jsonArray.ranges)//.reverse();// array of objects
 
-	//tree.nodes add: children, depth, name, x, y
-	// hierarchy = tree.nodes(jsonArray.ranges).reverse();//array of objects
-	// hierarchy[hierarchy.length-1].key = root_key;
-	// hierarchy[hierarchy.length-1].color = root_color;
+
+	//hierarchy
+	let numLeafNodes = getNumLeafNodes(tree.nodes(jsonArray.ranges))
+	treeHeight = numLeafNodes * (node_radius * 3)
+
+	let windowsHeight = window.innerHeight || document.documentElement.clientHeight|| document.body.clientHeight;
+	if(treeHeight < windowsHeight){
+		treeHeight = windowsHeight - 50
+	}
+
+	tree.size([treeHeight, width]); //width from tree
+	hierarchy = tree.nodes(jsonArray.ranges)//.reverse();// array of objects
 	num_initial_color = getNodesByDepth(1).length;
-	// hierarchy[hierarchy.length-1].children.reverse().forEach(addingKey);//reverse() start from root to down
-	
-	// console.log(hierarchy)
+
 
 	//Loading VIS
 	loadMultiresolutionVis();

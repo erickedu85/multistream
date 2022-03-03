@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-129272585-1"></script>
+		<script>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+
+		gtag('config', 'UA-129272585-1');
+		</script>
+		<title>MultiStream</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+		<link rel="shortcut icon" type="image/png" href="img/multistream.png" />
+
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+
+		<!-- FONTS used for icons -->
+		<link href="fonts/font-awesome-4.2.0/css/font-awesome.min.css"
+			rel="stylesheet" type="text/css">
+
+		<link rel="stylesheet" type="text/css" href="css/style-multiresolution.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/style-tree.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/style-tooltip.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/loader.css"></link>
+
+		<!-- SCRIPTS -->
+		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+		<style>
+			.figures{
+				margin: 0.5rem 0rem 2rem 0rem;
+				display: block;
+				margin-left: auto;
+				margin-right: auto;
+				width: 70%;
+				height: auto;
+			}
+
+			.code{
+				background-color: #f0f0f0;
+				font-family: courier;
+			}
+
+
+		</style>
+
+	</head>
+	<body>
+
+		<div class="container">
+
+			<div class="panel">
+				<h2 class="title">Instructions to generate and load a dataset</h2>
+				<br>
+			</div>
+
+			<div class="row">
+				
+				<div class="col-sm-12">
+					<p>
+						MultiStream currently supports a JSON file containing time series organized in a hierarchy. We provide a script to generate such a file. Follow the above instructions to generate a supported file.
+					</p>
+					<h3>Preparing your data</h3>
+					<p>
+						First of all, we need two files: a CSV file for the time series data and a JSON file for the hierarchy structure:
+					</p>
+					<ol>
+						<li>
+							A CSV file containing the time series with the following headers:
+							<ul>
+								<li>
+									<strong>First column</strong> = 'date', an ISO-8601 date base formatted as YYYY-MM-DD or YYYY-MM-DD HH:mm:ssZ (Z necessary for specifying UTC). Time series granularity can be: minutes, hours, days, weeks, months and years. E.g., 2000-01-01 or 2016-05-28 19:50:00
+								</li>
+								<li>
+									<strong>Other columns</strong> = time series category names, strings corresponding to the names of the time series categories.
+								</li>
+							</ul>
+							
+							<img class="figures" src="./img/upload_file_example/data_csv_example.png"></img>
+						</li>
+						<li>
+							A JSON file containing the hierarchical structure with the following properties: 
+							<img class="figures" src="./img/upload_file_example/hierarchy_json_example.png"></img>
+						</li>
+					</ol>
+
+
+					<h3>Generating a supported file</h3>
+					We provide a script to generate a JSON file that MultiStream can load.
+					<p>
+						<h4>Prerequisites</h4>
+						<ul>
+							<li>Node.js v14 or later</li>
+							<li>Download the folder containing the required script and libraries from this <a href="#">link</a></li>
+							<li>Go to the downloaded folder and install the node dependencies: <span class="code">$npm i</span></li>
+						</ul>
+					</p>
+					<p>
+						
+						<h4>Run the script from the command line</h4>
+						Once the node dependencies are installed, you can run the <span class="code">preprocessing.js</span> script with the following arguments:
+						<ul>
+							<li><strong>required</strong> --raw: path to the time series data (CSV file) </li>
+							<li><strong>required</strong> --hierarchy: path to the hierarchy structure (JSON file) </li>
+							<li><strong>required</strong> --output: path to the output preprocessed file (JSON file) </li>
+							<li><strong>optional</strong> --datatype: time series data type </li>
+						</ul>
+						<p>
+
+							E.g.: <span class="code">$node preprocessing.js --raw=input/data.csv --hierarchy=input/hierarchy.json --output=data.json --datatype='number of bands'</span>
+						</p>
+						<p>
+							This script will generate <span class="code">data.json</span> which can be loaded by MultiStream
+						</p>
+					</p>
+
+					<h3>Loading in the application</h3>
+					Go to the <a href="./index.php">MultiStream web application</a> and upload the generated JSON file (e.g., <span class="code">data.json</span>)
+					<p>
+						<img class="figures" src="./img/upload_file_example/upload_multistream.png"></img>
+					</p>
+
+
+
+				</div>
+				<!-- <div class="col-sm-2">
+
+				</div> -->
+			</div>
+
+		</div>
+
+
+		
+
+
+	</body>
+</html>

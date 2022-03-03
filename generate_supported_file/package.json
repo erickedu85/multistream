@@ -1,0 +1,17 @@
+{
+  "name": "multistream_preprocessing",
+  "version": "1.0.0",
+  "description": "Generate a preprocessed file",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Erick Cuenca erickedu85@gmail.com (https://erickedu85.github.io)",
+  "license": "ISC",
+  "private": true,
+  "dependencies": {
+    "chroma-js": "^2.0.3",
+    "d3": "^3.5.17",
+    "minimist": "^1.2.5"
+  }
+}

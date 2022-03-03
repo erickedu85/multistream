@@ -1,0 +1,166 @@
+{
+	"ranges": {
+		"name": "music genres",
+		"children": [{
+				"name": "rhythm music",
+				"children": [{
+						"name": "blue note",
+						"children": [{
+								"name": "blues"
+							},
+							{
+								"name": "jazz"
+							}
+						]
+					},
+					{
+						"name": "r 'n' b",
+						"children": [{
+								"name": "r 'n' b"
+							},
+							{
+								"name": "soul"
+							},
+							{
+								"name": "funk"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "rock music",
+				"children": [{
+						"name": "heavy music",
+						"children": [{
+								"name": "industrial gothic",
+								"children": [{
+										"name": "industrial metal"
+									},
+									{
+										"name": "industrial"
+									}
+								]
+							},
+							{
+								"name": "metal",
+								"children": [{
+										"name": "black metal"
+									},
+									{
+										"name": "death metal"
+									},
+									{
+										"name": "heavy metal"
+									}
+								]
+							},
+							{
+								"name": "punk/wave",
+								"children": [{
+										"name": "punk"
+									},
+									{
+										"name": "new wave"
+									},
+									{
+										"name": "psychobilly"
+									},
+									{
+										"name": "hardcore punk"
+									}
+								]
+							}
+						]
+					},
+					{
+						"name": "classic rock",
+						"children": [{
+								"name": "hard rock"
+							},
+							{
+								"name": "psychedelic"
+							},
+							{
+								"name": "rock"
+							}
+						]
+					},
+					{
+						"name": "rock indie",
+						"children": [{
+								"name": "indie rock"
+							},
+							{
+								"name": "alternative"
+							}
+						]
+					}
+				]
+			},
+			{
+				"name": "pop music",
+				"children": [{
+						"name": "pop"
+					},
+					{
+						"name": "indie pop"
+					}
+				]
+			},
+			{
+				"name": "folk and country",
+				"children": [{
+						"name": "country"
+					},
+					{
+						"name": "folk"
+					}
+				]
+			},
+			{
+				"name": "jamaican",
+				"children": [{
+						"name": "ska"
+					},
+					{
+						"name": "reggae"
+					},
+					{
+						"name": "dub"
+					}
+				]
+			},
+			{
+				"name": "electronica",
+				"children": [{
+						"name": "rap music",
+						"children": [{
+								"name": "hip-hop"
+							},
+							{
+								"name": "rap"
+							}
+						]
+					},
+					{
+						"name": "breakdance",
+						"children": [{
+								"name": "house"
+							},
+							{
+								"name": "trance"
+							}
+						]
+					},
+					{
+						"name": "electronic"
+					},
+					{
+						"name": "downtempo"
+					}
+				]
+			}
+		]
+	}
+}

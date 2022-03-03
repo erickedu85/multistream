@@ -146,58 +146,102 @@
 
 			<div class="col-sm-3">
 
-				<form action="visualize.php" method="post"
-					enctype="multipart/form-data">
-					<h3>Visualize an example</h3>
-					<div class="dropdown">
-						<select id="dataset" name='dataset'>
-							<?php
-							header ( 'content-type: text/html; charset=utf-8' );
-							$myfile = fopen ( "php/select-option.txt", "r" ) or die ( "Unable to open file select-option.txt in php/!" );
-							
-							$index = 0;
-							
-							while ( ! feof ( $myfile ) ) {
-								$curr = fgets ( $myfile ) ;
-								$bgnoptgroup = strpos($curr, "beginoptgroup");
-								$endoptgroup = strpos($curr, "endoptgroup");
-
-								if ($bgnoptgroup !== false){
-									$optgrouplabelx = substr($curr,$bgnoptgroup + strlen("beginoptgroup"));
-									echo '<optgroup label="' . $optgrouplabelx . '">';	
-								}elseif ($endoptgroup !== false){
-									echo '</optgroup>';
-								}else{
-									echo '<option value="' . $index . '">' . $curr  . '</option>';	
-									$index ++;
-								}					
+				<div class="row" style="border-radius: 10px; border: 1px solid lightgray; width:100%; padding:0rem 1rem 1rem 1rem;">
+					<form action="visualize.php" method="post"
+						enctype="multipart/form-data">
+						<h3>Visualize an example</h3>
+						<div class="dropdown">
+							<select id="dataset" name='dataset' style="max-width:90%;">
+								<?php
+								header ( 'content-type: text/html; charset=utf-8' );
+								$myfile = fopen ( "php/select-option.txt", "r" ) or die ( "Unable to open file select-option.txt in php/!" );
 								
-							}
-							fclose ( $myfile );
-							?>
+								$index = 0;
+								
+								while ( ! feof ( $myfile ) ) {
+									$curr = fgets ( $myfile ) ;
+									$bgnoptgroup = strpos($curr, "beginoptgroup");
+									$endoptgroup = strpos($curr, "endoptgroup");
 
-						</select>
-					</div>
+									if ($bgnoptgroup !== false){
+										$optgrouplabelx = substr($curr,$bgnoptgroup + strlen("beginoptgroup"));
+										echo '<optgroup label="' . $optgrouplabelx . '">';	
+									}elseif ($endoptgroup !== false){
+										echo '</optgroup>';
+									}else{
+										echo '<option value="' . $index . '">' . $curr  . '</option>';	
+										$index ++;
+									}					
+									
+								}
+								fclose ( $myfile );
+								?>
+
+							</select>
+						</div>
+						<br>
+						<p>
+							<input type="submit" value="Visualize" name="submit">
+						</p>
+					</form>
+				</div>
+
+				<div class="row" style="border-radius: 10px; border: 1px solid lightgray; width:100%; margin-top:1rem; padding:0rem 1rem 1rem 1rem;">
+
+					<form action="visualize.php" method="post"
+						enctype="multipart/form-data">
+						<h3>Upload a file</h3>
+						
+
+						<input type="hidden" id="fileContent" name="fileContent">
+						<input type="hidden" id="fileName" name="fileName">
+						<input type="file" id="uploadFile" class="file-upload-button" accept=".json"/>
+						
+						<br>
+						<p>
+							<input id="btnVisualizeFile" type="submit" name="submit" value="Visualize" disabled>
+						</p>
+						<br>
+						Follow these <a href='instructions.html'>instructions</a> to generate a supported JSON file
+					</form>
+				</div>
+
+				<p>
 					<br>
+					<strong>Optimized</strong> for chrome browser.
+				</p>
 
-					<!-- 				
-					<h3>Upload your data (json file)</h3>
-					<p>
-						<input type="file" name="fileToUpload" id="fileToUpload">
-					</p>
-					 -->
-
-					<p>
-						<input type="submit" value="Visualize" name="submit">
-					</p>
-					<p>
-						<strong>Optimized</strong> for chrome browser.
-					</p>
-				</form>
 			</div>
 		</div>
-		<br> <br>
 	</div>
+
+
+	<script>
+
+		function handleFileSelect(evt) {
+
+			let f = evt.target.files[0]
+			let reader = new FileReader();
+			
+			reader.onload = (function(theFile){
+				return function(e){
+					// console.log(theFile)
+					var obj = e.target.result
+
+					document.getElementById('fileContent').value =  obj;
+					document.getElementById('fileName').value =  theFile.name;
+					document.getElementById('btnVisualizeFile').disabled = false
+				}
+			})(f);
+
+			reader.readAsText(f);
+			
+		}
+
+		document.getElementById('uploadFile').addEventListener('change', handleFileSelect, false);
+
+	</script>
+
 
 </body>
 </html>

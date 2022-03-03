@@ -19,207 +19,154 @@
 
 <script type='text/javascript'>
 			<?php ini_set("memory_limit","256M");?>
+			
 			<?php
-			$indexSelect = $_POST ["dataset"];
 
-			$name_covid = "COVID-19";
-			$fileName_covid = "data";
-			$filePath_covid = "source/covid_evolution/";
-			$timePolarity_covid =3; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-			$nTimeGranularity_covid = 1; // interval by nGranularity minimum 1 max 5
-			$isLargeTree_covid = TRUE;
-			$description_covid = "<strong>About: </strong>This visualization shows the COVID-19's evolution<br><strong>Period: </strong>From January 2020 to present (weekly updated)<br><strong>Periodicity: </strong>weekly (7 days)<br><strong>Dataset: </strong>This datasets comes from the <a href='https://ourworldindata.org/coronavirus-source-data' target='_blank'>Our World in Data</a> webpage. Visit the Github repository <a href='https://github.com/owid/covid-19-data/tree/master/public/data/' target='_blank'>here</a> ";
+				if (isset($_POST ["dataset"])) {
+
+					$indexSelect = $_POST ["dataset"];
 			
-			switch ($indexSelect) {
-				case 0 :
-					$name = "Music genre evolution";
-					$fileName = "data";
-					$filePath = "source/music_genre_evolution/" . $fileName . ".json";
-					$timePolarity = 5; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>This visualization shows the evolution of music genres<br><strong>Period: </strong>From 1960 to 2016<br><strong>Dataset: </strong>10,642 bands. Metadata comes from MusicBrainz web site";
-					break;
-				case 1 :
-					$name = "AIDS";
-					$fileName = "data";
-					$filePath = "source/aids/" . $fileName . ".json";
-					$timePolarity = 4; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>";
-					break;					
-				case 2:
-					$name = $name_covid. ' - Total confirmed cases';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "total_cases/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 3:
-					$name = $name_covid . ' - New confirmed cases';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_cases/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 4:
-					$name = $name_covid. ' - New confirmed cases smoothed';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_cases_smoothed/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 5:
-					$name = $name_covid. ' - Total confirmed cases per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "total_cases_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 6:
-					$name = $name_covid. ' - New confirmed cases per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_cases_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 7:
-					$name = $name_covid. ' - New confirmed cases smoothed per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_cases_smoothed_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;	
-				case 8:
-					$name = $name_covid. ' - Total deaths';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "total_deaths/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;		
-				case 9:
-					$name = $name_covid. ' - New deaths';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_deaths/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 10:
-					$name = $name_covid. ' - New deaths smoothed';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_deaths_smoothed/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;		
-				case 11:
-					$name = $name_covid. ' - Total deaths per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "total_deaths_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;
-				case 12:
-					$name = $name_covid. ' - New deaths per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_deaths_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;	
-				case 13:
-					$name = $name_covid. ' - New deaths smoothed per million';
-					$fileName = $fileName_covid;
-					$filePath = $filePath_covid . "new_deaths_smoothed_per_million/" . $fileName . ".json";
-					$timePolarity = $timePolarity_covid; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = $nTimeGranularity_covid; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = $isLargeTree_covid;
-					$description = $description_covid;
-					break;																														
-				case 14 :
-					$name = "Sentiment analysis of the 2016 US presidential election day";
-					$fileName = "data";
-					$filePath = "source/2016_us_presidential_election_day/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 US presidential election day<br><strong>Period: </strong>8-9 November, 2016 (UTC)<br><strong>Dataset: </strong>371,584 tweets with the hashtag #Hillary or #Trump";
-					break;
-				case 15 :
-					$name = "Sentiment analysis of the 2016 US second presidential debate";
-					$fileName = "data";
-					$filePath = "source/2016_us_second_presidential_debate/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>Tweets collected<br><strong>Period: </strong><br><strong>Tweets: </strong>  <br><strong>Hashtag: </strong>";
-					break;
-				case 16 :
-					$name = "Sentiment analysis of the 2013 Australian presidential period";
-					$fileName = "data";
-					$filePath = "source/2013_australian_presidential_period/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 5; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2013 Australian presidential period<br><strong>Period: </strong>5-7 September, 2013 (UTC+10)<br><strong>Dataset: </strong> 122,393 tweets";
-					break;
-				case 17 :
-					$name = "Sentiment analysis of the 2016 UEFA Champions league final";
-					$fileName = "data";
-					$filePath = "source/2016_uefa_champions_league_final/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 UEFA Champions league final<br><strong>Period: </strong>Mai 28th, 2016 20:00-24:00 (UTC+2)<br><strong>Tweets: </strong>2,009 tweets";
-					break;
-				case 18 :
-					$name = "Sentiment analysis of a rugby union match 2014";
-					$fileName = "data";
-					$filePath = "source/2014_rugby_union_match/" . $fileName . ".json";
-					$timePolarity = 0; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
-					$nTimeGranularity = 1; // interval by nGranularity minimum 1 max 5
-					$isLargeTree = FALSE;
-					$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on a rugby union match 2014<br><strong>Period: </strong>November 22th, 2014 17:40-19:10 (UTC+2)<br><strong>Tweets: </strong>2,531 tweets with the hashtag #WAvNZ";
-					break;
-
+					$name_covid = "COVID-19";
+					$filePath_covid = "source/covid_evolution/";
+					$timePolarity_covid =3; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
+					$nTimeGranularity_covid = 1; // interval by nGranularity minimum 1 max 5
+					$isLargeTree_covid = TRUE;
+					$description_covid = "<strong>About: </strong>This visualization shows the COVID-19's evolution<br><strong>Period: </strong>From January 2020 to present (weekly updated)<br><strong>Periodicity: </strong>weekly (7 days)<br><strong>Dataset: </strong>This datasets comes from the <a href='https://ourworldindata.org/coronavirus-source-data' target='_blank'>Our World in Data</a> webpage. Visit the Github repository <a href='https://github.com/owid/covid-19-data/tree/master/public/data/' target='_blank'>here</a> ";
 					
-			}
-			
-			$str = file_get_contents ( $filePath );
-			
-			// $json = json_decode ( json_encode ( utf8_encode ( $str ) ) ); // WORKS
-			$json = json_decode ( json_encode ( $str ) ); // PRUEBA WORKS AUSSI
-			$error = json_last_error ();
-			
-			?>
-			var jsonArray =  <?php echo ($json); ?>;
-			var timePolarity = <?php echo $timePolarity; ?>;
-			var nTimeGranularity = <?php echo $nTimeGranularity; ?>;
-			var fileName = <?php echo json_encode($fileName); ?>; //json_encode for the String
-			var isLargeTree = <?php echo json_encode($isLargeTree); ?>;
-			
+					switch ($indexSelect) {
+						case 0 :
+							$name = "Music genre evolution";
+							$filePath = "source/music_genre_evolution/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>This visualization shows the evolution of music genres<br><strong>Period: </strong>From 1960 to 2016<br><strong>Dataset: </strong>10,642 bands. Metadata comes from MusicBrainz web site";
+							break;
+						case 1 :
+							$name = "AIDS";
+							$filePath = "source/aids/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>";
+							break;					
+						case 2:
+							$name = $name_covid. ' - Total confirmed cases';
+							$filePath = $filePath_covid . "total_cases/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 3:
+							$name = $name_covid . ' - New confirmed cases';
+							$filePath = $filePath_covid . "new_cases/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 4:
+							$name = $name_covid. ' - New confirmed cases smoothed';
+							$filePath = $filePath_covid . "new_cases_smoothed/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 5:
+							$name = $name_covid. ' - Total confirmed cases per million';
+							$filePath = $filePath_covid . "total_cases_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 6:
+							$name = $name_covid. ' - New confirmed cases per million';
+							$filePath = $filePath_covid . "new_cases_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 7:
+							$name = $name_covid. ' - New confirmed cases smoothed per million';
+							$filePath = $filePath_covid . "new_cases_smoothed_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;	
+						case 8:
+							$name = $name_covid. ' - Total deaths';
+							$filePath = $filePath_covid . "total_deaths/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;		
+						case 9:
+							$name = $name_covid. ' - New deaths';
+							$filePath = $filePath_covid . "new_deaths/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 10:
+							$name = $name_covid. ' - New deaths smoothed';
+							$filePath = $filePath_covid . "new_deaths_smoothed/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;		
+						case 11:
+							$name = $name_covid. ' - Total deaths per million';
+							$filePath = $filePath_covid . "total_deaths_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;
+						case 12:
+							$name = $name_covid. ' - New deaths per million';
+							$filePath = $filePath_covid . "new_deaths_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;	
+						case 13:
+							$name = $name_covid. ' - New deaths smoothed per million';
+							$filePath = $filePath_covid . "new_deaths_smoothed_per_million/data.json";
+							$isLargeTree = $isLargeTree_covid;
+							$description = $description_covid;
+							break;																														
+						case 14 :
+							$name = "Sentiment analysis of the 2016 US presidential election day";
+							$filePath = "source/2016_us_presidential_election_day/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 US presidential election day<br><strong>Period: </strong>8-9 November, 2016 (UTC)<br><strong>Dataset: </strong>371,584 tweets with the hashtag #Hillary or #Trump";
+							break;
+						case 15 :
+							$name = "Sentiment analysis of the 2016 US second presidential debate";
+							$filePath = "source/2016_us_second_presidential_debate/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>Tweets collected<br><strong>Period: </strong><br><strong>Tweets: </strong>  <br><strong>Hashtag: </strong>";
+							break;
+						case 16 :
+							$name = "Sentiment analysis of the 2013 Australian presidential period";
+							$filePath = "source/2013_australian_presidential_period/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2013 Australian presidential period<br><strong>Period: </strong>5-7 September, 2013 (UTC+10)<br><strong>Dataset: </strong> 122,393 tweets";
+							break;
+						case 17 :
+							$name = "Sentiment analysis of the 2016 UEFA Champions league final";
+							$filePath = "source/2016_uefa_champions_league_final/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 UEFA Champions league final<br><strong>Period: </strong>Mai 28th, 2016 20:00-24:00 (UTC+2)<br><strong>Tweets: </strong>2,009 tweets";
+							break;
+						case 18 :
+							$name = "Sentiment analysis of a rugby union match 2014";
+							$filePath = "source/2014_rugby_union_match/data.json";
+							$isLargeTree = FALSE;
+							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on a rugby union match 2014<br><strong>Period: </strong>November 22th, 2014 17:40-19:10 (UTC+2)<br><strong>Tweets: </strong>2,531 tweets with the hashtag #WAvNZ";
+							break;
+					}
 
+					$str = file_get_contents ( $filePath );
+					$json = json_decode ( json_encode ( $str ) );
+
+				} else {
+					
+					// File Uploaded
+					$name = $_POST ["fileName"];
+					$isLargeTree = FALSE;
+					$description = "";
+					$json = json_decode( json_encode ( $_POST ["fileContent"] ) );
+				}
+			
+				$error = json_last_error ();
+			?>
+
+
+			var jsonArray =  <?php echo ($json); ?>;
 			
 
 		</script>

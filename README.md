@@ -13,14 +13,15 @@ Streamgraph, Stacked Graph, Time Series, Aggregation, Multiresolution Visualizat
 **BibTex**
 ```
 @article{cuenca2018multistream,
-  title={Multistream: A Multiresolution Streamgraph Approach to Explore Hierarchical Time Series},
+  title={MultiStream: A Multiresolution Streamgraph Approach to Explore Hierarchical Time Series},
   author={Cuenca, Erick and Sallaberry, Arnaud and Wang, Florence Y and Poncelet, Pascal},
-  journal={IEEE Transactions on Visualization and Computer Graphics},
+  journal={IEEE Transactions on Visualization and Computer Graphics (TVCG)},
   volume={24},
   number={12},
   pages={3160--3173},
   year={2018},
-  publisher={IEEE}
+  publisher={IEEE},
+  doi={10.1109/TVCG.2018.2796591}
 }
 ```
 
