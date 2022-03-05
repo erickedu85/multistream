@@ -495,7 +495,7 @@ function loadMultiresolutionVis(){
 	d3.select("#svg-export").on("click",function() {
 		beforeExport();
 		var num_svg = [0,1]; //num_svg to download
-		svgExport(fileName, num_svg);
+		svgExport('MultiStream', num_svg);
 	});
 	
 	d3.select("#time").on("mouseup", function() {
