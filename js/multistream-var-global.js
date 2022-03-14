@@ -43,8 +43,8 @@ function getTimePolarityGranularity(dateOne, dateTwo){
 	let getTimePolarity = d3.time.format.multi([
 		[ "0", function(d) { return d.getMinutes(); }],
 		[ "1", function(d) { return d.getHours(); }],
-		[ "2", function(d) {return d.getDay() && d.getDate() != 1;} ],
-		[ "3", function(d) {return d.getDate() != 1;} ], 
+		[ "2", function(d) {return d.getDay() ;} ],
+		[ "3", function(d) {return d.getDate();} ], 
 		[ "4", function(d) {return d.getMonth();} ], 
 		[ "5", function(d) {return d.getYear();} ] 
 	]);
@@ -52,8 +52,8 @@ function getTimePolarityGranularity(dateOne, dateTwo){
 	let getValueTimeGranularity = d3.time.format.multi([ 
 		[ "%M", function(d) { return d.getMinutes(); }],
 		[ "%H", function(d) { return d.getHours(); }],
-		[ "%d", function(d) {return d.getDay() && d.getDate() != 1;} ],
-		[ "%U", function(d) {return d.getDate() != 1;} ], 
+		[ "%d", function(d) {return d.getDay();} ],
+		[ "%U", function(d) {return d.getDate();} ], 
 		[ "%m", function(d) {return d.getMonth();} ], 
 		[ "%Y", function(d) {return d.getYear();} ] 
 	]);
@@ -142,7 +142,8 @@ $(document).ready(function() {
 	nTimeGranularity = timeFeatures[1];
 
 	data_type = jsonArray.type;
-
+	// console.log('Time polarity:',timePolarity)
+	// console.log('Time granularity:',nTimeGranularity)
 
 	//hierarchy
 	let numLeafNodes = getNumLeafNodes(tree.nodes(jsonArray.ranges))
