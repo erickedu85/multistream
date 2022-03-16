@@ -107,11 +107,13 @@
 							<li><strong>required</strong> --raw: path to the time series data (CSV file) </li>
 							<li><strong>required</strong> --hierarchy: path to the hierarchy structure (JSON file) </li>
 							<li><strong>required</strong> --output: path to the output preprocessed file (JSON file) </li>
+							<li><strong>required</strong> --granularity: time series granularity. E.g., "minutes" or "hours" or "days" or "weeks" or "months" or "years" </li>
+							<li><strong>required</strong> --step: time step between each observation. E.g., if "granularity"="minutes" and "step"=5, then it means that the time series is every five minutes. Most of the time step=1 </li>
 							<li><strong>optional</strong> --datatype: time series data type </li>
 						</ul>
 						<p>
 
-							E.g.: <span class="code">$node preprocessing.js --raw=input/data.csv --hierarchy=input/hierarchy.json --output=data.json --datatype='number of bands'</span>
+							E.g.: <span class="code">$node preprocessing.js --raw=input/data.csv --hierarchy=input/hierarchy.json --output=data.json --granularity='years' --step=1 --datatype='number of bands'</span>
 						</p>
 						<p>
 							This script will generate <span class="code">data.json</span> which can be loaded by MultiStream

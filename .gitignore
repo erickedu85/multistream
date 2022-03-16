@@ -1,3 +1,4 @@
 .git
 source/pre_processing
 generate_supported_file/node_modules
+generate_supported_file/data.json

@@ -37,29 +37,63 @@ function setNumChildrenLeaf(d){
 	}
 }
 
-function getTimePolarityGranularity(dateOne, dateTwo){
-	// https://github.com/d3/d3-time-format
+// function getTimePolarityGranularity(dateOne, dateTwo){
+// 	// https://github.com/d3/d3-time-format
 
-	let getTimePolarity = d3.time.format.multi([
-		[ "0", function(d) { return d.getMinutes(); }],
-		[ "1", function(d) { return d.getHours(); }],
-		[ "2", function(d) {return d.getDay() ;} ],
-		[ "3", function(d) {return d.getDate();} ], 
-		[ "4", function(d) {return d.getMonth();} ], 
-		[ "5", function(d) {return d.getYear();} ] 
-	]);
+// 	let getTimePolarity = d3.time.format.multi([
+// 		[ "0", function(d) {console.log('Minutes',d.getMinutes()); return d.getMinutes(); }],
+// 		[ "1", function(d) {console.log('hours',d.getHours()); return d.getHours(); }],
+// 		[ "2", function(d) {console.log('day',d.getDay());return d.getDay() && d.getDate() != 1;} ],
+// 		[ "3", function(d) {console.log('dates - week',d.getDate());return d.getDate() != 1;} ], 
+// 		[ "4", function(d) {console.log('month',d.getMonth()); return d.getMonth();} ], 
+// 		[ "5", function(d) {console.log('year',d.getYear()); return d.getYear()} ] 
+// 	]);
 
-	let getValueTimeGranularity = d3.time.format.multi([ 
-		[ "%M", function(d) { return d.getMinutes(); }],
-		[ "%H", function(d) { return d.getHours(); }],
-		[ "%d", function(d) {return d.getDay();} ],
-		[ "%U", function(d) {return d.getDate();} ], 
-		[ "%m", function(d) {return d.getMonth();} ], 
-		[ "%Y", function(d) {return d.getYear();} ] 
-	]);
+// 	let getValueTimeGranularity = d3.time.format.multi([ 
+// 		[ "%M", function(d) {return d.getMinutes(); }],
+// 		[ "%H", function(d) {return d.getHours(); }],
+// 		[ "%d", function(d) {return d.getDay() && d.getDate() != 1;} ],
+// 		[ "%U", function(d) {return d.getDate() != 1;} ], 
+// 		[ "%m", function(d) {return d.getMonth();} ], 
+// 		[ "%Y", function(d) {return d.getYear()} ] 
+// 	]);
 
-	let timePolarity = parseInt(getTimePolarity(dateOne));
-	let timeGranularity = getValueTimeGranularity(dateTwo) - getValueTimeGranularity(dateOne);
+// 	let timePolarity = parseInt(getTimePolarity(dateOne));
+// 	let timeGranularity = getValueTimeGranularity(dateTwo) - getValueTimeGranularity(dateOne);
+
+// 	return [timePolarity,timeGranularity]
+// }
+
+function getTimePolarityGranularity(granularity,timeStep){
+	
+	let timePolarity = ""
+	let timeGranularity = timeStep
+	if (typeof(timeStep) == 'string'){
+		timeGranularity = parseInt(timeStep.toLowerCase().trim())
+	}
+
+	switch(granularity.toLowerCase().trim()){
+		case "years":
+			timePolarity = 5;
+			break;
+		case "months":
+			timePolarity = 4;
+			break;
+		case "weeks":
+			timePolarity = 3;
+			break;
+		case "days":
+			timePolarity = 2;
+			break;
+		case "hours":
+			timePolarity = 1;
+			break;	
+		case "minutes":
+			timePolarity = 0;
+			break;				
+		default:
+			console.log('error in getTimePolarityGranularity()')
+	}
 
 	return [timePolarity,timeGranularity]
 }
@@ -135,15 +169,16 @@ $(document).ready(function() {
 	dateMinRange = dateRange[0]
 	dateMaxRange = dateRange[dateRange.length-1]
 	dateExtRange = [dateMinRange,dateMaxRange]
+	// console.log(dateExtRange)
 
 	// getting time polarity and granularity
-	let timeFeatures = getTimePolarityGranularity(dateRange[0],dateRange[1]);
+	let timeFeatures = getTimePolarityGranularity(jsonArray.t_granularity,jsonArray.t_step);
 	timePolarity = timeFeatures[0];
 	nTimeGranularity = timeFeatures[1];
 
 	data_type = jsonArray.type;
-	// console.log('Time polarity:',timePolarity)
-	// console.log('Time granularity:',nTimeGranularity)
+	console.log('Time polarity:',timePolarity)
+	console.log('Time granularity:',nTimeGranularity)
 
 	//hierarchy
 	let numLeafNodes = getNumLeafNodes(tree.nodes(jsonArray.ranges))

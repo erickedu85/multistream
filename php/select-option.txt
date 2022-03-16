@@ -21,9 +21,9 @@ endoptgroup
 beginoptgroup Political events
 2016 US presidential election day
 2016 US second presidential debate
+2013 Australian presidential period
 endoptgroup
 beginoptgroup Sporting events
-2013 Australian presidential period
 2016 UEFA Champions league final
 2014 Rugby union match
 endoptgroup

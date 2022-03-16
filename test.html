@@ -1,0 +1,68 @@
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+
+<script type="text/javascript" src="js/d3.min.js"></script>
+
+<script>
+
+    var parseDate = d3.time.format("%Y-%m-%dT%H:%M:%S.000Z").parse;
+
+    // if the specified date is not a round hour, the minute format is used
+    // etc
+
+    //start of february
+    //2000-02-01 => February
+    //getDate() == 1
+
+    //2nd february 
+    //2000-02-02 => Feb 2
+    //getDate() ==2
+
+    //getDate()	Get the day as a number (1-31)
+    //getDay()	Get the weekday as a number (0-6) 'domingo = 0, lunes=1, martes, miercoles, jueves, viernes, sabado'
+    let getTimePolarity = d3.time.format.multi([
+            [ "min", function(d) {return d.getMinutes(); }], // Si min != 0 entonces true y sale
+            [ "hour", function(d) {return d.getHours(); }], // Si hour != 0 entonces true y sale
+            [ "day", function(d) {console.log(d.getDay());return d.getDay() && d.getDate() != 1;} ], //si getdate() !=1
+            [ "week", function(d) {return d.getDate() != 1;} ], 
+            [ "month", function(d) {return d.getMonth();} ], 
+            // [ "5", function(d) {console.log('year',d.getYear() == true); return d.getYear()} ] 
+            ["year", function() { return true; }]
+        ]);
+    
+    // si min no es, entonces hour, entonces day, entonces week, entonces month, entonce year
+    let fecha1 = "2003-05-01T00:00:00.000Z";
+    //2020-01-05T00:00:00.000Z
+    
+    
+
+    // year, month, mon-day, week, day, hour, min
+    let fecha_parsed = parseDate(fecha1);
+    // console.log(fecha_parsed, typeof(fecha_parsed))
+    
+
+    
+
+
+    let obtener = getTimePolarity(fecha_parsed)
+    
+    
+    console.log("Que es: ",obtener)
+    
+    
+    </script>
+
+
+</head>
+<body>
+
+<h1>My First Heading</h1>
+<p>My first paragraph.</p>
+
+</body>
+</html>
+
