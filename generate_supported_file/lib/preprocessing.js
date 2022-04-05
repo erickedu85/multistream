@@ -19,15 +19,19 @@ function getPreproData (rawDataHierarchy,rawData,color_palette){
 		keys = Object.keys(d).slice(1)
 
 		keys.forEach(k=>{
-			node = jerarquia.getNodeByName(k,hierarchy)
-			leaf_level.push(
-				{
-					'date':d['date'],
-					'name':k,
-					'value':+d[k],
-					'key': node.key
-				}
-			)
+			try{
+				node = jerarquia.getNodeByName(k,hierarchy)
+				leaf_level.push(
+					{
+						'date':d['date'],
+						'name':k,
+						'value':+d[k],
+						'key': node.key
+					}
+				)
+			} catch(error){
+				console.error("Error in: ", k)
+			};
 		});
 	});
 
