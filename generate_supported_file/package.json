@@ -10,8 +10,8 @@
   "license": "ISC",
   "private": true,
   "dependencies": {
-    "chroma-js": "^2.0.3",
-    "d3": "^3.5.17",
-    "minimist": "^1.2.5"
+    "chroma-js": "2.0.3",
+    "d3": "3.5.17",
+    "minimist": "1.2.6"
   }
 }
