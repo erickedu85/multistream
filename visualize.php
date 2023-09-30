@@ -45,104 +45,110 @@
 							$filePath = "source/aids/data.json";
 							$isLargeTree = FALSE;
 							$description = "<strong>About: </strong>";
-							break;					
-						case 2:
+							break;	
+						case 2 :
+							$name = "Surface temperature changes";
+							$filePath = "source/surface_temperature_changes/data.json";
+							$isLargeTree = TRUE;
+							$description = "<strong>About: </strong>This visualization shows the evolution of the surface temperature changes<br><strong>Period: </strong>From 1970 to 2021<br>This datasets comes from the <a href='https://www.kaggle.com/datasets/mdazizulkabirlovlu/all-countries-temperature-statistics-1970-2021/' target='_blank'>All Countries Temperature Statistics 1970-2021</a> webpage.";
+							break;												
+						case 3:
 							$name = $name_covid. ' - Total confirmed cases';
 							$filePath = $filePath_covid . "total_cases/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 3:
+						case 4:
 							$name = $name_covid . ' - New confirmed cases';
 							$filePath = $filePath_covid . "new_cases/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 4:
+						case 5:
 							$name = $name_covid. ' - New confirmed cases smoothed';
 							$filePath = $filePath_covid . "new_cases_smoothed/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 5:
+						case 6:
 							$name = $name_covid. ' - Total confirmed cases per million';
 							$filePath = $filePath_covid . "total_cases_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 6:
+						case 7:
 							$name = $name_covid. ' - New confirmed cases per million';
 							$filePath = $filePath_covid . "new_cases_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 7:
+						case 8:
 							$name = $name_covid. ' - New confirmed cases smoothed per million';
 							$filePath = $filePath_covid . "new_cases_smoothed_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;	
-						case 8:
+						case 9:
 							$name = $name_covid. ' - Total deaths';
 							$filePath = $filePath_covid . "total_deaths/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;		
-						case 9:
+						case 10:
 							$name = $name_covid. ' - New deaths';
 							$filePath = $filePath_covid . "new_deaths/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 10:
+						case 11:
 							$name = $name_covid. ' - New deaths smoothed';
 							$filePath = $filePath_covid . "new_deaths_smoothed/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;		
-						case 11:
+						case 12:
 							$name = $name_covid. ' - Total deaths per million';
 							$filePath = $filePath_covid . "total_deaths_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;
-						case 12:
+						case 13:
 							$name = $name_covid. ' - New deaths per million';
 							$filePath = $filePath_covid . "new_deaths_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;	
-						case 13:
+						case 14:
 							$name = $name_covid. ' - New deaths smoothed per million';
 							$filePath = $filePath_covid . "new_deaths_smoothed_per_million/data.json";
 							$isLargeTree = $isLargeTree_covid;
 							$description = $description_covid;
 							break;																														
-						case 14 :
+						case 15 :
 							$name = "Sentiment analysis of the 2016 US presidential election day";
 							$filePath = "source/2016_us_presidential_election_day/data.json";
 							$isLargeTree = FALSE;
 							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 US presidential election day<br><strong>Period: </strong>8-9 November, 2016 (UTC)<br><strong>Dataset: </strong>371,584 tweets with the hashtag #Hillary or #Trump";
 							break;
-						case 15 :
+						case 16 :
 							$name = "Sentiment analysis of the 2016 US second presidential debate";
 							$filePath = "source/2016_us_second_presidential_debate/data.json";
 							$isLargeTree = FALSE;
 							$description = "<strong>About: </strong>Tweets collected<br><strong>Period: </strong><br><strong>Tweets: </strong>  <br><strong>Hashtag: </strong>";
 							break;
-						case 16 :
+						case 17 :
 							$name = "Sentiment analysis of the 2013 Australian presidential period";
 							$filePath = "source/2013_australian_presidential_period/data.json";
 							$isLargeTree = FALSE;
 							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2013 Australian presidential period<br><strong>Period: </strong>5-7 September, 2013 (UTC+10)<br><strong>Dataset: </strong> 122,393 tweets";
 							break;
-						case 17 :
+						case 18 :
 							$name = "Sentiment analysis of the 2016 UEFA Champions league final";
 							$filePath = "source/2016_uefa_champions_league_final/data.json";
 							$isLargeTree = FALSE;
 							$description = "<strong>About: </strong>This visualization shows the sentiments expressed in tweets on the 2016 UEFA Champions league final<br><strong>Period: </strong>Mai 28th, 2016 20:00-24:00 (UTC+2)<br><strong>Tweets: </strong>2,009 tweets";
 							break;
-						case 18 :
+						case 19 :
 							$name = "Sentiment analysis of a rugby union match 2014";
 							$filePath = "source/2014_rugby_union_match/data.json";
 							$isLargeTree = FALSE;
