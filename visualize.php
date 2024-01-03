@@ -31,7 +31,7 @@
 					$timePolarity_covid =3; // 0 minutes, 1 hours, 2 days, 3 week, 4 month, 5 years
 					$nTimeGranularity_covid = 1; // interval by nGranularity minimum 1 max 5
 					$isLargeTree_covid = TRUE;
-					$description_covid = "<strong>About: </strong>This visualization shows the COVID-19's evolution<br><strong>Period: </strong>From January 2020 to present (weekly updated)<br><strong>Periodicity: </strong>weekly (7 days)<br><strong>Dataset: </strong>This datasets comes from the <a href='https://ourworldindata.org/coronavirus-source-data' target='_blank'>Our World in Data</a> webpage. Visit the Github repository <a href='https://github.com/owid/covid-19-data/tree/master/public/data/' target='_blank'>here</a> ";
+					$description_covid = "<strong>About: </strong>This visualization shows the COVID-19's evolution<br><strong>Period: </strong>From January 2020 to 2023<br><strong>Periodicity: </strong>weekly (7 days)<br><strong>Dataset: </strong>This datasets comes from the <a href='https://ourworldindata.org/coronavirus-source-data' target='_blank'>Our World in Data</a> webpage. Visit the Github repository <a href='https://github.com/owid/covid-19-data/tree/master/public/data/' target='_blank'>here</a> ";
 					
 					switch ($indexSelect) {
 						case 0 :
