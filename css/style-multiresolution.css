@@ -9,10 +9,12 @@ body {
 }
 
 div {
-    -webkit-user-select: none; /* Chrome, Opera, Safari */
-    -moz-user-select: none; /* Firefox 2+ */
-    -ms-user-select: none; /* IE 10+ */
-    /* user-select: none; Standard syntax */
+    /* Chrome, Opera, Safari */
+	/* -webkit-user-select: none;  */
+	/* Firefox 2+ */
+    /* -moz-user-select: none; */
+	/* IE 10+ */ 
+    /* -ms-user-select: none;  */
 }
 
 #body-visualization {

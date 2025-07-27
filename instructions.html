@@ -15,22 +15,28 @@
 		<link rel="shortcut icon" type="image/png" href="img/multistream.png" />
 
 		<!-- CSS -->
-		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 
 		<!-- FONTS used for icons -->
 		<link href="fonts/font-awesome-4.2.0/css/font-awesome.min.css"
 			rel="stylesheet" type="text/css">
 
-		<link rel="stylesheet" type="text/css" href="css/style-multiresolution.css"></link>
-		<link rel="stylesheet" type="text/css" href="css/style-tree.css"></link>
-		<link rel="stylesheet" type="text/css" href="css/style-tooltip.css"></link>
-		<link rel="stylesheet" type="text/css" href="css/loader.css"></link>
+		<link rel="stylesheet" type="text/css" href="css/style-multiresolution.css">
+		<link rel="stylesheet" type="text/css" href="css/style-tree.css">
+		<link rel="stylesheet" type="text/css" href="css/style-tooltip.css">
+		<link rel="stylesheet" type="text/css" href="css/loader.css">
 
 		<!-- SCRIPTS -->
 		<script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
 		<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 		<style>
+
+			h2 {
+				padding-top: 0.6em;
+  				padding-bottom: 0.2em;
+			}
+
 			.figures{
 				margin: 0.5rem 0rem 2rem 0rem;
 				display: block;
@@ -40,9 +46,45 @@
 				height: auto;
 			}
 
-			.code{
-				background-color: #f0f0f0;
-				font-family: courier;
+			.code {
+				background-color: #f5f5f5;
+				font-family: Consolas, Monaco, 'Courier New', monospace;
+				font-size: 0.95em;
+				padding: 2px 6px;
+				border-radius: 4px;
+				color: #c7254e;
+				background-color: #f9f2f4;
+				border: 1px solid #e1e1e8;
+				white-space: nowrap;
+			}
+
+			.code-block {
+				background-color: #2e2e2e;
+				color: #f8f8f2;
+				font-family: Consolas, Monaco, 'Courier New', monospace;
+				font-size: 0.95em;
+				padding: 12px;
+				border-radius: 6px;
+				overflow-x: auto;
+				margin-bottom: 1em;
+			}
+
+			.custom-table {
+				border-collapse: separate;
+				width: 100%;
+				margin-top: 1em;
+				margin-bottom: 1em;
+			}
+
+			.custom-table th,
+			.custom-table td {
+				padding: 7px 10px; /* equivale a cellpadding */
+				border: 1px solid #ccc;
+				text-align: left;
+			}
+
+			.custom-table th {
+				background-color: #f5f5f5;
 			}
 
 
@@ -54,7 +96,7 @@
 		<div class="container">
 
 			<div class="panel">
-				<h2 class="title">Instructions to generate and load a dataset</h2>
+				<h2 class="title">Instructions to Generate and Load a Dataset in MultiStream</h2>
 				<br>
 			</div>
 
@@ -62,71 +104,139 @@
 				
 				<div class="col-sm-12">
 					<p>
-						MultiStream currently supports a JSON file containing time series organized in a hierarchy. We provide a script to generate such a file. Follow the above instructions to generate a supported file.
+						MultiStream supports a JSON file containing time series organized in a hierarchy structure. We provide a script that helps you generate this file. Follow the instructions below to create a compatible dataset and load it into MultiStream.
 					</p>
-					<h3>Preparing your data</h3>
+					<h2>Preparing your data</h2>
 					<p>
-						First of all, we need two files: a CSV file for the time series data and a JSON file for the hierarchy structure:
+						To start, you need <strong>two input files:</strong>
 					</p>
 					<ol>
 						<li>
-							A CSV file containing the time series with the following headers: (<a href="generate_supported_file/input/data.csv">example</a>)
+							<strong>CSV File: Time Series Data</strong> <br>
+							This file must contain the following structure: (<a href="generate_supported_file/input/data.csv" target="_blank">example</a>)
 							<ul>
 								<li>
-									<strong>First column</strong> = 'date', an ISO-8601 date base formatted as YYYY-MM-DD or YYYY-MM-DD HH:mm:ssZ (Z necessary for specifying UTC). Time series granularity can be: minutes, hours, days, weeks, months and years. E.g., 2000-01-01 or 2016-05-28 19:50:00
+									<strong>First column: </strong>it must be named <em>date</em> and formatted using ISO-8601, either as YYYY-MM-DD or YYYY-MM-DD HH:mm:ssZ
+									<ul>
+										<li>
+											The Z suffix is required if using UTC
+										</li>
+										<li>
+											 Suported time granularities: minutes, hours, days, weeks, months and years
+										</li>
+										<li>
+											Examples: 2000-01-01 or 2016-05-28 19:50:00
+										</li>
+									</ul>
 								</li>
 								<li>
-									<strong>Other columns</strong> = time series category names, strings corresponding to the names of the time series categories.
+									<strong>Other columns: </strong>time series category names. These must be strings identifying each individual time series
 								</li>
 							</ul>
 							
-							<img class="figures" src="./img/upload_file_example/data_csv_example.png"></img>
+							<img class="figures" src="./img/upload_file_example/data_csv_example.png">
 						</li>
 						<li>
-							A JSON file containing the hierarchical structure with the following properties: (<a href="generate_supported_file/input/hierarchy.json">example</a>)
-							<img class="figures" src="./img/upload_file_example/hierarchy_json_example.png"></img>
+							<strong>JSON File: Hierarchical Structure</strong> <br>
+							This file should define the hierarchy of your categories (<a href="generate_supported_file/input/hierarchy.json" target="_blank">example</a>)
+							<img class="figures" src="./img/upload_file_example/hierarchy_json_example.png">
 						</li>
 					</ol>
 
 
-					<h3>Generating a supported file</h3>
-					We provide a script to generate a JSON file that MultiStream can load.
+					<h2>Generating a supported file</h2>
+					We provide a preprocessing script that transforms your CSV and JSON file into a format that MultiStream can load.
 					<p>
 						<h4>Prerequisites</h4>
 						<ul>
-							<li>Node.js v14 or later</li>
-							<li>Download the folder containing the required script and libraries from this <a href="generate_supported_file.zip" download>link</a></li>
-							<li>Go to the downloaded folder and install the node dependencies: <span class="code">$npm i</span></li>
+							<li>Node.js version 14 or later</li>
+							<li>Download the required script and dependencies: <a href="generate_supported_file.zip" download>generate_supported_file.zip</a></li>
+							<li>Open your terminal (Linux/macOS) or command prompt (Windows), navigate to the downloaded folder, and run: <span class="code">npm i</span></li>
 						</ul>
 					</p>
 					<p>
 						
-						<h4>Run the script from the command line</h4>
-						Once the node dependencies are installed, you can run the <span class="code">preprocessing.js</span> script with the following arguments:
+						<h4>Run the script</h4>
+						Use the command line to execute <span class="code">preprocessing.js</span> with the following arguments:
+
+						<table class="custom-table">
+							<thead>
+								<tr>
+									<th>Argument</th>
+									<th>Description</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><code>--raw</code> <em>(required)</em></td>
+									<td>Path to the CSV file with the raw time series data</td>
+								</tr>
+								<tr>
+									<td><code>--hierarchy</code> <em>(required)</em></td>
+									<td>Path to the JSON file containing the hierarchy</td>
+								</tr>
+								<tr>
+									<td><code>--output</code> <em>(required)</em></td>
+									<td>Path to save the output JSON file</td>
+								</tr>
+								<tr>
+									<td><code>--granularity</code> <em>(required)</em></td>
+									<td>Time unit used in the series <br> <strong>Allowed values: </strong><code>minutes</code>, <code>hours</code>, <code>days</code>, <code>weeks</code>, <code>months</code>, <code>years</code></td>
+								</tr>
+								<tr>
+									<td><code>--step</code> <em>(required)</em></td>
+									<td>Step size between time points (usually 1)</td>
+								</tr>
+								<tr>
+									<td><code>--datatype</code> <em>(optional)</em></td>
+									<td>Description of the time series data (e.g., "number of bands")</td>
+								</tr>
+							</tbody>
+						</table>					
+
+						<p>You can run the script using this command:</p>
+							<pre class="code-block">node preprocessing.js --raw=input/data.csv --hierarchy=input/hierarchy.json --output=output.json --granularity=years --step=1 --datatype="number of bands"
+							</pre>
+						<p>
+							This will generate a file named <span class="code">output.json</span>, which can be loaded by MultiStream.
+						</p>
+					</p>
+
+					<h2>Loading the file in MultiStream</h2>
+					Go to the <a href="./index.php" target="_blank">MultiStream web application</a> and upload the generated file (e.g., <span class="code">output.json</span>).
+					<!-- <p>
+						<img class="figures" src="./img/upload_file_example/upload_multistream.png">
+					</p> -->
+
+
+					<h2>Tips & requirements</h2>
+
+
+					<h4>CSV File: Time Series Data</h4>
+					<ul>
+						<li>Use clear, unique, and non-empty column names.</li>
+						<li>The <strong>first column must be named</strong> <code>date</code> and follow the ISO-8601 format (e.g., <code>YYYY-MM-DD</code> or <code>YYYY-MM-DD HH:mm:ssZ</code>).</li>
+						<li>Avoid missing or null values in any column.</li>
+					</ul>
+
+					<h4>JSON File: Hierarchical Structure</h4>
 						<ul>
-							<li><strong>required</strong> --raw: path to the time series data (CSV file) </li>
-							<li><strong>required</strong> --hierarchy: path to the hierarchy structure (JSON file) </li>
-							<li><strong>required</strong> --output: path to the output preprocessed file (JSON file) </li>
-							<li><strong>required</strong> --granularity: time series granularity. E.g., "minutes" or "hours" or "days" or "weeks" or "months" or "years" </li>
-							<li><strong>required</strong> --step: time step between each observation. E.g., if "granularity"="minutes" and "step"=5, then it means that the time series is every five minutes. Most of the time step=1 </li>
-							<li><strong>optional</strong> --datatype: time series data type </li>
-						</ul>
-						<p>
+						<li>Define a clear <strong>hierarchical structure</strong> for the time series categories.</li>
+						<li>Ensure every category in the hierarchy <strong>matches a column name</strong> in the CSV (excluding <code>date</code>).</li>
+						<li>Use valid JSON syntax and ensure correct nesting of hierarchy nodes.</li>
+					</ul>
 
-							E.g.: <span class="code">$node preprocessing.js --raw=input/data.csv --hierarchy=input/hierarchy.json --output=data.json --granularity='years' --step=1 --datatype='number of bands'</span>
-						</p>
-						<p>
-							This script will generate <span class="code">data.json</span> which can be loaded by MultiStream
-						</p>
-					</p>
+					
 
-					<h3>Loading in the application</h3>
-					Go to the <a href="./index.php">MultiStream web application</a> and upload the generated JSON file (e.g., <span class="code">data.json</span>)
 					<p>
-						<img class="figures" src="./img/upload_file_example/upload_multistream.png"></img>
+						If you have any questions or run into issues, feel free to <strong><a href="mailto:ecuenca@yachaytech.edu.ec">contact us</a> </strong>
 					</p>
 
-
+					<br>
+					<br>
+					<br>
+					<br>
+					<br>
 
 				</div>
 				<!-- <div class="col-sm-2">

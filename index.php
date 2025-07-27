@@ -21,8 +21,7 @@
 <link href="fonts/font-awesome-4.2.0/css/font-awesome.min.css"
 	rel="stylesheet" type="text/css">
 
-<link rel="stylesheet" type="text/css"
-	href="css/style-multiresolution.css"></link>
+<link rel="stylesheet" type="text/css" href="css/style-multiresolution.cs?v=20250726"></link>
 <link rel="stylesheet" type="text/css" href="css/style-tree.css"></link>
 <link rel="stylesheet" type="text/css" href="css/style-tooltip.css"></link>
 <link rel="stylesheet" type="text/css" href="css/loader.css"></link>
@@ -203,7 +202,7 @@
 							<input id="btnVisualizeFile" type="submit" name="submit" value="Visualize" disabled>
 						</p>
 						<br>
-						Follow these <a href='instructions.html'>instructions</a> to generate a supported JSON file
+						Follow these <strong><a href='instructions.html' target="_blank">instructions</a></strong> to generate a supported JSON file
 					</form>
 				</div>
 
